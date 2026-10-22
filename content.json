@@ -1,0 +1,8 @@
+{
+  "services": [
+    {"title":"Everyday wellness","description":"A healthy start. A happy life. Exams and preventive care tailored to your companion.","anchor":"wellness","icon":"heart","color":"sage"},
+    {"title":"When they need more","description":"Answers, treatment, and a caring team for illness, injuries, and unexpected worries.","anchor":"injury","icon":"cross","color":"peach"},
+    {"title":"Healthy little smiles","description":"Dental care that helps keep every kiss, crunch, and happy grin feeling good.","anchor":"dentistry","icon":"tooth","color":"blue"},
+    {"title":"Beyond cats & dogs","description":"Compassionate care for the hoppers, crawlers, and wonderfully different family members.","anchor":"exotics","icon":"rabbit","color":"yellow"}
+  ]
+}
