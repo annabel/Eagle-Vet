@@ -1,33 +1,77 @@
-# Eagle Vet — homepage concept
+# Eagle Veterinary Hospital
 
-A fully custom, local-only homepage demo. No framework, dependencies, CMS, or build step required. Run `npm run dev`, then visit http://127.0.0.1:4173. Node 18+ required.
+A custom homepage redesign for Eagle Veterinary Hospital in Eagle, Idaho. Built with HTML, CSS, and JavaScript, with a warm palette, playful shapes, the clinic’s existing logo, and photography from its current website.
 
-## Editing
-- `index.html`: page structure and narrative copy.
-- `styles.css`: responsive design, palette, typography, and decorative shapes.
-- `content.json`: service records; an initial example of separating editable data from presentation.
-- `app.js`: service rendering and accessible mobile navigation.
-- `assets/`: local clinic photographs and logo; fonts stylesheet currently references Google-hosted fonts.
+**[View the demo](https://annabel.github.io/Eagle-Vet/)** · [Current clinic website](https://www.eaglevethosp.com/)
 
-CMS can be added later. Move the remaining editable copy into structured files and configure Pages CMS to edit those files. This is a homepage prototype, not a full site migration.
+## Project status
 
-## Demo behavior
-Appointment requests, team details, client portal, service details, and ordering links go to the existing clinic website. No form submissions or patient data are collected by this demo. Phone, email, and directions links use real clinic contact details. Search indexing is disabled. No tracking installed.
+This is a published homepage prototype. Appointment requests, service details, team profiles, the client portal, and ordering links lead to the existing clinic website. The demo does not collect form submissions or patient information. Search indexing is disabled, and no analytics tags have been added.
 
-## Content and assets
-Logo and two clinic photos were retrieved from the current eaglevethosp.com site. The quote is an excerpt from its homepage testimonial attributed to Robyn Boersma. Confirm usage rights and all content with the owner before launch.
+The hero uses the original homepage’s photograph of two dogs running, with the headline “Your pet’s health is our top priority.” The log cabin appears in the clinic story section.
 
-`assets/cabin-reference.png` is the supplied map screenshot. `assets/cabin-demo.png` is an AI-retouched concept asset made with the built-in image generation tool. Prompt: Remove ONLY the two map-pin UI overlays and translucent halos; preserve the building, sign, landscaping, perspective, framing, colors, lighting, and photographic character. Generative edits can alter details; replace with an original exterior photograph before launch.
+## Run locally
 
-Hours conflict on the existing website, so this demo uses weekdays only and links to current hours pending owner confirmation. This demo does not claim same-day availability or emergency coverage.
+Requires Node.js 18 or newer. No dependency installation or build step is needed.
 
-Design direction: warm ivory, deep blue and forest green, sage, peach, rounded editorial type, arched photography and hand-drawn accents. Heritage Animal Hospital was a visual reference; no assets or copy were taken from it.
+```bash
+npm run dev
+```
 
-## Animal-led hero revision
-Hero headline: Their best life. Our whole heart. The cabin photo now appears in the story section. `assets/pets-hero.png` is a fictional, AI-generated demo portrait, not clinic patients. Built-in image generation prompt: Photorealistic editorial golden retriever and gray tabby cat sitting side by side, friendly natural expressions, ivory floor and pale sage background, natural daylight, landscape composition with room for an arched crop; no people, text, logos, or medical equipment.
+Open [http://127.0.0.1:4173/](http://127.0.0.1:4173/). Refresh the browser after editing files.
 
-Hero photography correction: the homepage uses the original clinic-team.jpg photograph from the existing clinic website. The generated pets-hero.png is unused and is not displayed.
+To use a different port:
 
-Current hero: assets/original-home-hero.jpg, the two running dogs photograph from the original clinic homepage (mia-anderson-2k6v10Y2dIg-unsplash.jpg). No AI-generated animal imagery is used.
+```bash
+PORT=4174 npm run dev
+```
 
-Hero caption “Fido & Max, Eagle, ID” contains user-requested placeholder names and location, not verified identities for the photographed dogs. Replace before launch.
+## Project files
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Homepage structure, copy, navigation, and links |
+| `styles.css` | Responsive layouts, colors, typography, and decorative shapes |
+| `content.json` | Service titles, descriptions, icons, and destination anchors |
+| `app.js` | Service rendering, mobile navigation, and footer year |
+| `assets/` | Logo, photographs, and font stylesheet |
+| `server.mjs` | Local preview server; not needed by GitHub Pages |
+| `.nojekyll` | Serves the static site without Jekyll processing |
+
+Typography uses DM Sans and Bricolage Grotesque. The local font stylesheet references Google-hosted font files.
+
+## Publish updates
+
+GitHub Pages publishes the root of the `main` branch. Its automatic deployment runs after changes are pushed; no custom workflow or build pipeline is required.
+
+```bash
+git add index.html styles.css content.json app.js assets/
+git commit -m "Update homepage"
+git push origin main
+```
+
+Stage whichever files you actually changed, including `README.md` for documentation updates.
+
+- **Repository:** [annabel/Eagle-Vet](https://github.com/annabel/Eagle-Vet)
+- **SSH origin:** `git@github.com:annabel/eagle-vet.git`
+- **Deployment status:** [GitHub Actions](https://github.com/annabel/Eagle-Vet/actions)
+- **Publishing settings:** Settings → Pages → Deploy from a branch → `main` → `/ (root)`
+
+Keep asset and content paths relative so the site works under `/Eagle-Vet/` as well as locally.
+
+## Future content editing
+
+Content currently lives in code and local files. Service records are already separated into `content.json`; other editable copy remains in `index.html`. If the clinic needs its own editor, move staff, hours, specials, and other copy into structured files and add a lightweight editing layer such as Pages CMS.
+
+## Photography and launch notes
+
+- `assets/logo-mark.png` is the existing illustrated clinic logo.
+- `assets/original-home-hero.jpg` is the original homepage photograph (`mia-anderson-2k6v10Y2dIg-unsplash.jpg`).
+- “Fido & Max, Eagle, ID” is a placeholder caption requested for the demo; the dogs’ names and location are unverified.
+- `assets/cabin-reference.png` is the supplied exterior screenshot. The displayed `assets/cabin-demo.png` is an AI-retouched version with the map pins removed. Replace it with an original exterior photograph before the final launch.
+- The cabin edit used the built-in image generation tool with the instruction to remove only the two map pins and halos while preserving the building, sign, landscaping, framing, and photographic character. Generated edits can alter details.
+- `assets/pets-hero.png` is an unused generated concept image. The displayed animal photograph is from the original website.
+- The testimonial excerpt is attributed to Robyn Boersma on the existing homepage.
+- Opening times conflict on the existing website. The demo lists weekdays and links to current hours until the owner confirms the schedule.
+
+Before replacing the clinic’s live site, confirm copy, photography rights, captions, hours, and destination links with the owner, and plan redirects for any changed URLs.
