@@ -210,9 +210,13 @@ func main() {
 			log.Fatal("PORT must be between 1 and 65535")
 		}
 	}
+	host := os.Getenv("HOST")
+	if host == "" {
+		host = "127.0.0.1"
+	}
 	var listener net.Listener
 	for attempt := 0; attempt < 10 && port <= 65535; attempt++ {
-		listener, err = net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", port))
+		listener, err = net.Listen("tcp", net.JoinHostPort(host, strconv.Itoa(port)))
 		if err == nil {
 			break
 		}

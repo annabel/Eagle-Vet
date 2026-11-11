@@ -30,7 +30,7 @@ go build -o bin/eagle-vet .
 ./bin/eagle-vet
 ```
 
-The single binary contains the templates and assets. It currently binds to localhost for development. Production hosting, public binding, TLS, and form delivery are not configured.
+The single binary contains the templates and assets. It binds to `127.0.0.1` by default; set `HOST=0.0.0.0` to accept connections from outside localhost. The production container uses `0.0.0.0:8080`. Form delivery remains unconfigured.
 
 ## Structure
 
@@ -81,6 +81,16 @@ The homepage features one Instagram post. To update it, replace the image, date,
 
 ## Publishing
 
-This Go app requires a host that runs a Go executable. **GitHub Pages cannot run it.** The existing published static demo is unchanged. No hosting settings, GitHub workflows, commits, or pushes were made during this rebuild. The original static files are backed up in `legacy/` for reference.
+Deploy with Kamal using Docker with Buildx, Kamal 2.10+, and an authenticated 1Password CLI. Registry credentials are loaded through `.kamal/secrets`.
 
-All changes are intentionally local and uncommitted. Commit and publish only after your own review.
+```sh
+# First deployment:
+kamal setup
+
+# Subsequent deployments:
+kamal deploy
+```
+
+Site: **https://eagle-vet.greenbelt.software**
+
+Deployments build the current working tree, including uncommitted changes. Search indexing stays disabled and forms remain demonstrations.

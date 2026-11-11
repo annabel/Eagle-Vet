@@ -1,0 +1,9 @@
+*
+!go.mod
+!main.go
+!templates/
+!templates/**
+!static/
+!static/**
+!content/
+!content/**

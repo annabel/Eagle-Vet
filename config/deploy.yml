@@ -1,0 +1,30 @@
+minimum_version: 2.10.0
+service: eagle-vet
+image: sgray/eagle-vet
+
+servers:
+  web:
+    - 143.198.155.18
+
+proxy:
+  run:
+    version: v0.10.2
+  ssl: true
+  host: eagle-vet.greenbelt.software
+  app_port: 8080
+  healthcheck:
+    path: /
+
+registry:
+  server: ghcr.io
+  username: sgray
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+  # Build the current working tree, including local changes.
+  context: .
+
+ssh:
+  user: steve
