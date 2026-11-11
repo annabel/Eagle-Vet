@@ -91,6 +91,6 @@ kamal setup
 kamal deploy
 ```
 
-Site: **https://eagle-vet.greenbelt.software**
+Site: **https://eaglevet.greenbelt.software**
 
 Deployments build the current working tree, including uncommitted changes. Search indexing stays disabled and forms remain demonstrations.

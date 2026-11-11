@@ -10,7 +10,7 @@ proxy:
   run:
     version: v0.10.2
   ssl: true
-  host: eagle-vet.greenbelt.software
+  host: eaglevet.greenbelt.software
   app_port: 8080
   healthcheck:
     path: /
