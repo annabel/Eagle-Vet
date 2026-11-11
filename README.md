@@ -94,3 +94,11 @@ kamal deploy
 Site: **https://eaglevet.greenbelt.software**
 
 Deployments build the current working tree, including uncommitted changes. Search indexing stays disabled and forms remain demonstrations.
+
+## Updates and maintenance
+
+Dependabot checks Go modules and Docker base images daily and assigns its pull requests to `sgray`. The root and legacy `package.json` files contain local commands only, with no npm dependencies to update.
+
+`~/Projects/ansible/update-apps` includes this checkout's Go builder, `go.mod`, shared proxy pin, and deployed `/eagle-vet` binary. It proposes exact stable Go patch pins even when the builder currently uses a floating minor-version tag; `--apply` changes local pins only and requires all managed app checkouts to be clean.
+
+The shared server's `maintenance.yml` checks Eagle-Vet on port 8080 at `/`, matching Kamal's health check, and verifies `https://eaglevet.greenbelt.software/` with a valid TLS certificate before and after host updates. Maintenance does not deploy the app.
