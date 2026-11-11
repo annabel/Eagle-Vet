@@ -1,0 +1,26 @@
+[
+  {
+    "Image": "/assets/photo-gallery-1.jpg",
+    "Caption": "Our updated sign"
+  },
+  {
+    "Image": "/assets/photo-gallery-2.jpg",
+    "Caption": "The lobby"
+  },
+  {
+    "Image": "/assets/photo-gallery-3.jpg",
+    "Caption": "IDEXX in-house lab equipment"
+  },
+  {
+    "Image": "/assets/photo-gallery-4.jpg",
+    "Caption": "Digital X-ray equipment"
+  },
+  {
+    "Image": "/assets/photo-gallery-5.jpg",
+    "Caption": "The surgical suite"
+  },
+  {
+    "Image": "/assets/photo-gallery-6.jpg",
+    "Caption": "IDEXX digital cytology"
+  }
+]

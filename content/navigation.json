@@ -1,0 +1,88 @@
+[
+  {
+    "Label": "Home",
+    "URL": "/"
+  },
+  {
+    "Label": "About Us",
+    "URL": "/about-us",
+    "Links": [
+      {
+        "Label": "Meet The Team",
+        "URL": "/meettheteam"
+      },
+      {
+        "Label": "Testimonials",
+        "URL": "/testimonials"
+      }
+    ]
+  },
+  {
+    "Label": "What We Do",
+    "URL": "/what-we-do",
+    "Links": [
+      {
+        "Label": "Services",
+        "URL": "/services"
+      },
+      {
+        "Label": "Wellness care",
+        "URL": "/services#wellness"
+      },
+      {
+        "Label": "Injury + Illness",
+        "URL": "/services#injury"
+      },
+      {
+        "Label": "Dentistry",
+        "URL": "/services#dentistry"
+      },
+      {
+        "Label": "Soft Tissue Surgery",
+        "URL": "/services#surgery"
+      },
+      {
+        "Label": "Urgent Care",
+        "URL": "/services#urgent"
+      },
+      {
+        "Label": "Exotics",
+        "URL": "/services#exotics"
+      },
+      {
+        "Label": "Naturopathic Care",
+        "URL": "/services#naturopathic"
+      },
+      {
+        "Label": "In-house Pharmacy",
+        "URL": "/services#pharmacy"
+      }
+    ]
+  },
+  {
+    "Label": "Resources",
+    "URL": "/resources",
+    "Links": [
+      {
+        "Label": "Patient Resources",
+        "URL": "/patient-resources"
+      },
+      {
+        "Label": "Client Portal",
+        "URL": "/client-portal"
+      },
+      {
+        "Label": "Online Ordering",
+        "URL": "/online-ordering"
+      },
+      {
+        "Label": "Client Specials",
+        "URL": "/client-specials"
+      }
+    ]
+  },
+  {
+    "Label": "Visit Us",
+    "URL": "/visit-us"
+  }
+]

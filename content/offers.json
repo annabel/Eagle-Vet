@@ -1,0 +1,45 @@
+[
+  {
+    "Title": "Young Canine Wellness Profile",
+    "Price": "126.56",
+    "Image": "/assets/client-specials-1.jpg",
+    "Items": [
+      "Basic bloodwork",
+      "Heartworm test",
+      "Screening for three tick-borne diseases",
+      "Fecal test"
+    ]
+  },
+  {
+    "Title": "Young Feline Wellness Profile",
+    "Price": "128.00",
+    "Image": "/assets/client-specials-2.jpg",
+    "Items": [
+      "Basic bloodwork",
+      "Feline leukemia / FIV test",
+      "Fecal test"
+    ]
+  },
+  {
+    "Title": "Comprehensive Canine Wellness Profile",
+    "Price": "193.80",
+    "Image": "/assets/client-specials-3.jpg",
+    "Items": [
+      "Comprehensive bloodwork and thyroid test",
+      "Urinalysis",
+      "Heartworm and tick-borne disease screening",
+      "Fecal test"
+    ]
+  },
+  {
+    "Title": "Comprehensive Feline Wellness Profile",
+    "Price": "199.50",
+    "Image": "/assets/client-specials-4.jpg",
+    "Items": [
+      "Comprehensive bloodwork and thyroid test",
+      "Urinalysis",
+      "Feline leukemia / FIV test",
+      "Fecal test"
+    ]
+  }
+]

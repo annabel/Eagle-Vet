@@ -1,2 +1,7 @@
 .DS_Store
+.tools/
+/bin/
 node_modules/
+*.log
+.env
+/eagle-vet

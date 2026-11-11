@@ -1,0 +1,9 @@
+{{define "content"}}<section class="wrap section team-page" id="meettheteam"><div class="section-heading"><h1>Get to know your <span class="accent">Eagle Vet team</span></h1></div><div class="team-grid">{{range $i, $person := .Staff}}
+<article class="person">
+ <button class="person-photo" type="button" data-bio-open="bio-{{$i}}" aria-haspopup="dialog" aria-controls="bio-{{$i}}" aria-label="Read bio for {{.Name}}"><img src="{{.Image}}" alt="{{.Name}}" width="700" height="800" loading="lazy"></button>
+ <div class="person-info"><h3>{{.Name}}</h3><p class="person-role">{{.Role}}</p><button class="bio-trigger" type="button" data-bio-open="bio-{{$i}}" aria-haspopup="dialog" aria-controls="bio-{{$i}}">Get to know {{.Name}} <span aria-hidden="true">↗</span></button></div>
+ <dialog id="bio-{{$i}}" class="bio-dialog" aria-labelledby="bio-title-{{$i}}" aria-describedby="bio-role-{{$i}}">
+  <div class="bio-dialog-header"><span class="eyebrow">MEET YOUR EAGLE VET TEAM</span><button class="bio-close" type="button" data-bio-close aria-label="Close biography" autofocus><span aria-hidden="true">×</span></button></div>
+  <div class="bio-dialog-body"><img src="{{.Image}}" alt="{{.Name}}" width="700" height="800" loading="lazy"><div><h2 id="bio-title-{{$i}}">{{.Name}}</h2><p class="bio-role" id="bio-role-{{$i}}">{{.Role}}</p><p class="bio-copy">{{.Bio}}</p></div></div>
+ </dialog>
+</article>{{end}}</div></section>{{end}}

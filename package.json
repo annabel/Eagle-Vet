@@ -1,1 +1,1 @@
-{"name":"eagle-vet","version":"0.1.0","private":true,"description":"Custom Eagle Veterinary Hospital homepage demo","scripts":{"dev":"node server.mjs","start":"node server.mjs","check":"node --check app.js && node --check server.mjs"},"engines":{"node":">=18"}}
+{"name":"eagle-vet","version":"0.2.0","private":true,"description":"Hand-written Go website for Eagle Veterinary Hospital","scripts":{"dev":"./dev.sh","start":"./dev.sh","check":"go test ./..."}}

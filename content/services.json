@@ -1,0 +1,135 @@
+[
+  {
+    "ID": "wellness",
+    "Title": "Wellness Care",
+    "Intro": "A healthy start, and support for every year after. Preventive care tailored to your companion’s age, lifestyle, and needs.",
+    "Items": [
+      "Vaccinations",
+      "Deworming",
+      "Fecal testing",
+      "Heartworm prevention",
+      "Flea and tick prevention",
+      "Preventive screening lab work"
+    ],
+    "Image": "/assets/services-2.jpg",
+    "More": []
+  },
+  {
+    "ID": "injury",
+    "Title": "Injury + Illness",
+    "Intro": "When something doesn’t seem right, we’re here to listen, examine, and help you understand the next step.",
+    "Items": [
+      "Internal medicine",
+      "Dermatology",
+      "Ophthalmology",
+      "In-house lab work",
+      "Digital radiographs"
+    ],
+    "Image": "/assets/services-3.jpg",
+    "More": []
+  },
+  {
+    "ID": "dentistry",
+    "Title": "Dentistry",
+    "Intro": "Thoughtful dental care to help keep your pet’s mouth comfortable and healthy.",
+    "Items": [
+      "Dental cleanings",
+      "Extractions",
+      "Oral surgery",
+      "Digital dental X-rays"
+    ],
+    "Image": "/assets/services-4.jpg",
+    "More": []
+  },
+  {
+    "ID": "surgery",
+    "Title": "Soft Tissue Surgery",
+    "Intro": "From routine procedures to more involved care, our team will talk you through your pet’s treatment and recovery.",
+    "Items": [
+      "Spay and neuter",
+      "Gastrointestinal surgery",
+      "Mass removal",
+      "Cystotomy / bladder stone removal"
+    ],
+    "Image": "/assets/services-5.jpg",
+    "More": []
+  },
+  {
+    "ID": "urgent",
+    "Title": "Urgent Care",
+    "Intro": "For unexpected concerns, call the clinic to discuss your pet’s needs and availability.",
+    "Items": [
+      "Lacerations and wound care",
+      "Fractures",
+      "Toxin ingestion",
+      "Broken nails",
+      "Hot spots",
+      "Eye injuries",
+      "Vomiting and diarrhea",
+      "Ear infections"
+    ],
+    "Image": "/assets/services-6.jpg",
+    "More": []
+  },
+  {
+    "ID": "exotics",
+    "Title": "Exotics",
+    "Intro": "Big personalities come in every shape and size. Care for the furry, feathered, and scaly members of your family.",
+    "Items": [
+      "Small mammals: rabbits, guinea pigs, rats, and hamsters",
+      "Lizards: bearded dragons, leopard geckos, and chameleons",
+      "Turtles and tortoises",
+      "Birds: parakeets, cockatiels, parrots, chickens, and ducks"
+    ],
+    "Image": "/assets/services-7.jpg",
+    "More": []
+  },
+  {
+    "ID": "naturopathic",
+    "Title": "Naturopathic Care",
+    "Intro": "Discuss complementary care options with Dr. Lauren Davis and find out what may be appropriate for your companion.",
+    "Items": [
+      "Acupuncture",
+      "Veterinary orthopedic manipulation",
+      "Chinese and Western herbs",
+      "Homeopathy",
+      "Reiki",
+      "Nutraceuticals"
+    ],
+    "Image": "/assets/services-8.jpg",
+    "More": [
+      {
+        "Title": "Acupuncture",
+        "Text": "Ask Dr. Davis about acupuncture and whether it belongs in your pet’s care plan."
+      },
+      {
+        "Title": "Veterinary orthopedic manipulation",
+        "Text": "A gentle approach to joint manipulation. The veterinarian can explain the procedure and discuss whether it is appropriate for your pet."
+      },
+      {
+        "Title": "Herbs and nutraceuticals",
+        "Text": "Discuss herbal products and nutritional supplements with the veterinarian, including how they fit with your pet’s current medications."
+      },
+      {
+        "Title": "Other complementary options",
+        "Text": "The clinic also lists homeopathy and Reiki among its services. Contact the team to discuss these options and your pet’s needs."
+      }
+    ]
+  },
+  {
+    "ID": "pharmacy",
+    "Title": "In-house Pharmacy",
+    "Intro": "Pick up medications and supplies through the clinic, or explore our online ordering partners.",
+    "Items": [
+      "Prescription medications",
+      "Flea, tick, and heartworm prevention",
+      "Prescription pet food",
+      "Joint supplements",
+      "Eye and ear medications",
+      "Pain control medications",
+      "Herbs and nutraceuticals"
+    ],
+    "Image": "/assets/services-9.jpg",
+    "More": []
+  }
+]
