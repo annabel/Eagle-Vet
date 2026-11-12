@@ -77,7 +77,7 @@ The hero caption “Fido & Max, Eagle, ID” remains an unverified placeholder. 
 
 Hours conflict and holiday dates are stale on the current site. The redesign shows weekdays, asks visitors to confirm opening times, and avoids presenting old holiday dates as current. Wellness-profile prices mirror the source and require owner confirmation. See `docs/content-review.md`.
 
-The homepage features one Instagram post. To update it, replace the image, date, caption, and post link in `templates/pages/home.html` and record the source in `docs/image-sources.json`. There is no live feed; replace or remove dated promotions after they end.
+The homepage shows four recent Instagram posts. To refresh the selection, update the images, dates, short descriptions, and links in `templates/pages/home.html` and record their sources in `docs/image-sources.json`. There is no live feed; replace dated promotions after they end.
 
 ## Publishing
 
