@@ -76,8 +76,7 @@ body.bio-open{overflow:hidden;}
 
 /* Recent Instagram posts framed as prints. */
 .home-instagram{background:#f5e8dc;}
-.instagram-intro h2{margin:0;color:var(--navy);font-size:clamp(37px,4.4vw,58px);line-height:1.12;}
-.instagram-intro h2 .accent{color:var(--ink);}
+.instagram-intro h2{margin:0;font-size:clamp(37px,4.4vw,58px);line-height:1.12;}
 .instagram-intro p{display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:15px;}
 .instagram-intro a{text-decoration:underline;text-underline-offset:3px;}
 .instagram-icon{display:block;width:20px;height:20px;flex:none;}
