@@ -1,0 +1,59 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+          cache: false
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ruby
+
+      - name: Install Kamal
+        run: gem install kamal --no-document
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Configure SSH host verification
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          : "${SSH_KNOWN_HOSTS:?Set the SSH_KNOWN_HOSTS repository secret}"
+
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          printf 'Host *\n  StrictHostKeyChecking yes\n  ForwardAgent no\n' > ~/.ssh/config
+          chmod 600 ~/.ssh/known_hosts ~/.ssh/config
+
+      - name: Deploy with Kamal
+        env:
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          : "${KAMAL_REGISTRY_PASSWORD:?Set the KAMAL_REGISTRY_PASSWORD repository secret}"
+          : "${SSH_PRIVATE_KEY:?Set the SSH_PRIVATE_KEY repository secret}"
+
+          eval "$(ssh-agent -s)"
+          trap 'ssh-agent -k > /dev/null' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add -
+
+          kamal deploy --version "$GITHUB_SHA"

@@ -28,3 +28,4 @@ builder:
 
 ssh:
   user: steve
+  forward_agent: false

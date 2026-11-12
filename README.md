@@ -81,23 +81,13 @@ The homepage shows four recent Instagram posts. To refresh the selection, update
 
 ## Publishing
 
-Deploy with Kamal using Docker with Buildx, Kamal 2.10+, and an authenticated 1Password CLI. Registry credentials are loaded through `.kamal/secrets`.
-
-```sh
-# First deployment:
-kamal setup
-
-# Subsequent deployments:
-kamal deploy
-```
+Deploy manually via **Actions → Deploy → Run workflow**, or locally with `kamal deploy`.
 
 Site: **https://eaglevet.greenbelt.software**
 
-Deployments build the current working tree, including uncommitted changes. Search indexing stays disabled and forms remain demonstrations.
-
 ## Updates and maintenance
 
-Dependabot checks Go modules and Docker base images daily and assigns its pull requests to `sgray`. The root and legacy `package.json` files contain local commands only, with no npm dependencies to update.
+Dependabot checks Go modules, Docker base images, and GitHub Actions daily and assigns its pull requests to `sgray`. The root and legacy `package.json` files contain local commands only, with no npm dependencies to update.
 
 `~/Projects/ansible/update-apps` includes this checkout's Go builder, `go.mod`, shared proxy pin, and deployed `/eagle-vet` binary. It proposes exact stable Go patch pins even when the builder currently uses a floating minor-version tag; `--apply` changes local pins only and requires all managed app checkouts to be clean.
 
