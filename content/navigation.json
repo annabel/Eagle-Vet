@@ -74,10 +74,6 @@
       {
         "Label": "Online Ordering",
         "URL": "/online-ordering"
-      },
-      {
-        "Label": "Client Specials",
-        "URL": "/client-specials"
       }
     ]
   },

@@ -41,7 +41,7 @@ The single binary contains the templates and assets. It binds to `127.0.0.1` by 
 | `templates/layout.html` | Shared document structure |
 | `templates/partials/` | Header, navigation, footer, page hero, and contact form |
 | `templates/pages/` | Individual pages, including the approved homepage |
-| `content/` | Hard-coded staff bios, navigation, services, testimonials, offers, and gallery records |
+| `content/` | Hard-coded staff bios, navigation, services, and testimonials |
 | `static/` | CSS, JavaScript, logo, and existing-site photography |
 | `docs/content-review.md` | Items to confirm with the clinic before launch |
 | `docs/image-sources.json` | URLs for photographs downloaded from the current clinic site |
@@ -55,11 +55,11 @@ The current site’s navigation groups and destination anchors are preserved:
 
 - **Home** → `/`
 - **About Us** → Meet The Team (`/meettheteam`), Testimonials. The `/meettheteam` page starts with the team; the former overview link and introductory sections have been removed.
-- **What We Do** → Services and its eight sections: wellness, injury, dentistry, surgery, urgent care, exotics, naturopathic care, and pharmacy
-- **Resources** → Patient Resources, Client Portal, Online Ordering, Client Specials
+- **What We Do** → Services, with sections for wellness, injury, dentistry, surgery, urgent care, exotics, pharmacy, end-of-life care, and naturopathic care
+- **Resources** → Patient Resources, Client Portal, Online Ordering
 - **Visit Us** → `/visit-us`
 
-Also included: `/appointment`, `/holiday-hours`, `/photo-gallery`, `/hello`, and a designed 404 page. `/home`, `/about`, `/about-us`, `/what-we-do`, and `/resources` redirect to their corresponding content pages. Trailing slashes redirect to canonical paths.
+Also included: `/appointment`, `/holiday-hours`, `/hello`, and a designed 404 page. `/home`, `/about`, `/about-us`, `/what-we-do`, and `/resources` redirect to their corresponding content pages. The former `/client-specials` URL redirects to Patient Resources. The former `/photo-gallery` URL redirects to Visit Us. Trailing slashes redirect to canonical paths.
 
 ## Forms and integrations
 

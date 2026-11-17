@@ -85,6 +85,29 @@
     "More": []
   },
   {
+    "ID": "pharmacy",
+    "Title": "In-house Pharmacy",
+    "Intro": "Pick up medications and supplies through the clinic, or explore our online ordering partners.",
+    "Items": [
+      "Prescription medications",
+      "Prescription pet food",
+      "Joint supplements",
+      "Eye and ear medications",
+      "Pain control medications",
+      "Herbs and nutraceuticals",
+      "Flea, tick, and heartworm prevention"
+    ],
+    "Image": "/assets/services-9.jpg",
+    "More": []
+  },
+  {
+    "ID": "end-of-life",
+    "Title": "End-of-Life Care",
+    "Image": "/assets/end-of-life-wildflowers.svg",
+    "ImageAlt": "A hand-drawn sprig of wildflowers",
+    "Intro": "Saying goodbye to a pet is hard. We’re here to listen, answer your questions, and talk through end-of-life care and cremation at your pace."
+  },
+  {
     "ID": "naturopathic",
     "Title": "Naturopathic Care",
     "Intro": "Discuss complementary care options with Dr. Lauren Davis and find out what may be appropriate for your companion.",
@@ -115,21 +138,5 @@
         "Text": "The clinic also lists homeopathy and Reiki among its services. Contact the team to discuss these options and your pet’s needs."
       }
     ]
-  },
-  {
-    "ID": "pharmacy",
-    "Title": "In-house Pharmacy",
-    "Intro": "Pick up medications and supplies through the clinic, or explore our online ordering partners.",
-    "Items": [
-      "Prescription medications",
-      "Flea, tick, and heartworm prevention",
-      "Prescription pet food",
-      "Joint supplements",
-      "Eye and ear medications",
-      "Pain control medications",
-      "Herbs and nutraceuticals"
-    ],
-    "Image": "/assets/services-9.jpg",
-    "More": []
   }
 ]

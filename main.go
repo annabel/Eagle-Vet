@@ -27,26 +27,19 @@ type NavGroup struct {
 }
 type Person struct{ Name, Role, Image, Bio string }
 type Service struct {
-	ID, Title, Intro, Image string
-	Items                   []string
-	More                    []Detail
+	ID, Title, Intro, Image, ImageAlt string
+	Items                             []string
+	More                              []Detail
 }
 type Detail struct{ Title, Text string }
 type Quote struct{ Text, Author string }
-type Offer struct {
-	Title, Price, Image string
-	Items               []string
-}
-type GalleryItem struct{ Image, Caption string }
 type Page struct {
-	Path, Name, Title, Eyebrow, Heading, Accent, Intro, Image, ImageAlt, Template string
-	Nav                                                                           []NavGroup
-	Staff                                                                         []Person
-	Services                                                                      []Service
-	Quotes                                                                        []Quote
-	Offers                                                                        []Offer
-	Gallery                                                                       []GalleryItem
-	Year                                                                          int
+	Path, Name, Title, Heading, Accent, Intro, Image, ImageAlt, Template string
+	Nav                                                                  []NavGroup
+	Staff                                                                []Person
+	Services                                                             []Service
+	Quotes                                                               []Quote
+	Year                                                                 int
 }
 
 type application struct {
@@ -67,13 +60,11 @@ func newApplication() (*application, error) {
 	var staff []Person
 	var services []Service
 	var quotes []Quote
-	var offers []Offer
-	var gallery []GalleryItem
 	var nav []NavGroup
 	for _, entry := range []struct {
 		name   string
 		target any
-	}{{"staff", &staff}, {"services", &services}, {"quotes", &quotes}, {"offers", &offers}, {"gallery", &gallery}, {"navigation", &nav}} {
+	}{{"staff", &staff}, {"services", &services}, {"quotes", &quotes}, {"navigation", &nav}} {
 		if err := loadJSON(entry.name, entry.target); err != nil {
 			return nil, fmt.Errorf("content %s: %w", entry.name, err)
 		}
@@ -81,16 +72,14 @@ func newApplication() (*application, error) {
 	pages := map[string]Page{
 		"/":                  {Name: "Home", Title: "Your pet’s health is our top priority", Template: "home"},
 		"/meettheteam":       {Name: "Meet the Team", Title: "Meet the Team", Template: "about"},
-		"/services":          {Name: "Services", Title: "Our Services", Eyebrow: "THOUGHTFUL CARE. EVERY CHAPTER.", Heading: "A little care goes", Accent: "a long way.", Intro: "From everyday wellness to the unexpected, personalized veterinary care for the Treasure Valley’s dogs, cats, and exotic companions.", Image: "/assets/services-2.jpg", ImageAlt: "A pet from the clinic’s existing services page", Template: "services"},
-		"/testimonials":      {Name: "Testimonials", Title: "Kind Words from Our Clients", Eyebrow: "FROM OUR COMMUNITY", Heading: "Happy pets.", Accent: "Happy people.", Intro: "The relationships we build are at the heart of what we do. Here’s what a few of our pet families have shared about their visits.", Image: "/assets/testimonials-1.jpg", ImageAlt: "A dog featured on the clinic’s testimonials page", Template: "testimonials"},
-		"/patient-resources": {Name: "Patient Resources", Title: "Patient Resources", Eyebrow: "A LITTLE HELP BETWEEN VISITS", Heading: "Everything you need,", Accent: "a little closer.", Intro: "Your pet’s portal, food and pharmacy orders, and client specials—all in one place. We’re here to help make caring for your companion easier.", Image: "/assets/patient-resources-1.jpg", ImageAlt: "A dog relaxing at home", Template: "resources"},
-		"/client-portal":     {Name: "Client Portal", Title: "Client Portal", Eyebrow: "CONNECTED TO THEIR CARE", Heading: "Their care.", Accent: "At your fingertips.", Intro: "Access your pet’s medical records, keep track of appointments, and stay connected to their care through the IDEXX Neo client portal.", Image: "/assets/client-portal-1.jpg", ImageAlt: "A pet featured on the current client portal page", Template: "portal"},
-		"/online-ordering":   {Name: "Online Ordering", Title: "Online Ordering", Eyebrow: "FROM OUR CLINIC TO YOUR DOOR", Heading: "More tail wags.", Accent: "Fewer errands.", Intro: "Order your pet’s medications, food, and everyday essentials through the clinic’s online pharmacy and nutrition partners.", Image: "/assets/online-ordering-1.jpg", ImageAlt: "Dogs enjoying a treat at home", Template: "ordering"},
-		"/client-specials":   {Name: "Client Specials", Title: "Client Specials", Eyebrow: "A LITTLE EXTRA CARE", Heading: "Good health.", Accent: "Thoughtful value.", Intro: "Explore our wellness profiles for dogs and cats. These offers are available with a paid wellness exam for new and existing patients.", Image: "/assets/client-specials-1.jpg", ImageAlt: "A dog from the clinic’s wellness specials page", Template: "specials"},
-		"/visit-us":          {Name: "Visit Us", Title: "Visit & Contact Us", Eyebrow: "COME ON OVER", Heading: "A familiar place.", Accent: "A warm welcome.", Intro: "Find our little log cabin on Palmetto Avenue in Eagle. Whether you’re new here or already part of the family, we’d love to hear from you.", Image: "/assets/cabin-demo.png", ImageAlt: "Eagle Veterinary Hospital’s log cabin on Palmetto Avenue", Template: "visit"},
+		"/services":          {Name: "Services", Title: "Our Services", Heading: "A little care goes", Accent: "a long way.", Intro: "From everyday wellness to the unexpected, personalized veterinary care for the Treasure Valley’s dogs, cats, and exotic companions.", Image: "/assets/services-hero.jpg", ImageAlt: "A cream-colored puppy sitting in the grass", Template: "services"},
+		"/testimonials":      {Name: "Testimonials", Title: "Kind Words from Our Clients", Heading: "Happy pets,", Accent: "happy people", Intro: "The relationships we build are at the heart of what we do. Here’s what a few of our pet families have shared about their visits.", Image: "/assets/testimonials-hero-boat.jpg", ImageAlt: "A black-and-white dog sitting on a boat at sunset", Template: "testimonials"},
+		"/patient-resources": {Name: "Patient Resources", Title: "Patient Resources", Heading: "Everything you need,", Accent: "a little closer.", Intro: "Your pet’s portal, and online ordering for food and medication. We’re here to help make caring for your companion easier.", Image: "/assets/patient-resources-1.jpg", ImageAlt: "A dog relaxing at home", Template: "resources"},
+		"/client-portal":     {Name: "Client Portal", Title: "Client Portal", Heading: "Their care.", Accent: "At your fingertips.", Intro: "Access your pet’s medical records, keep track of appointments, and stay connected to their care through the IDEXX Neo client portal.", Image: "/assets/client-portal-1.jpg", ImageAlt: "A pet featured on the current client portal page", Template: "portal"},
+		"/online-ordering":   {Name: "Online Ordering", Title: "Online Ordering", Heading: "More tail wags.", Accent: "Fewer errands.", Intro: "Order your pet’s medications, food, and everyday essentials through the clinic’s online pharmacy and nutrition partners.", Image: "/assets/online-ordering-1.jpg", ImageAlt: "Dogs enjoying a treat at home", Template: "ordering"},
+		"/visit-us":          {Name: "Visit Us", Title: "Visit & Contact Us", Heading: "A familiar place.", Accent: "A warm welcome.", Intro: "Find our little log cabin on Palmetto Avenue in Eagle. Whether you’re new here or already part of the family, we’d love to hear from you.", Image: "/assets/cabin-demo.png", ImageAlt: "Eagle Veterinary Hospital’s log cabin on Palmetto Avenue", Template: "visit"},
 		"/appointment":       {Name: "Appointment", Title: "Request an Appointment", Template: "appointment"},
-		"/holiday-hours":     {Name: "Holiday Hours", Title: "Holiday Hours", Eyebrow: "PLAN YOUR VISIT", Heading: "A little planning.", Accent: "A smoother visit.", Intro: "Our hours can change around holidays. Please contact the clinic to confirm opening times before making a special trip.", Template: "holidays"},
-		"/photo-gallery":     {Name: "Photo Gallery", Title: "Around Our Hospital", Eyebrow: "TAKE A LOOK AROUND", Heading: "A cozy cabin.", Accent: "A caring team.", Intro: "Step inside Eagle Veterinary Hospital—from our welcoming lobby to the equipment that helps us care for your companions.", Template: "gallery"},
+		"/holiday-hours":     {Name: "Holiday Hours", Title: "Holiday Hours", Heading: "A little planning.", Accent: "A smoother visit.", Intro: "Our hours can change around holidays. Please contact the clinic to confirm opening times before making a special trip.", Template: "holidays"},
 		"/hello":             {Name: "Hello", Title: "Welcome to Eagle Vet", Template: "hello"},
 	}
 	a := &application{pages: pages, templates: map[string]*template.Template{}}
@@ -100,8 +89,6 @@ func newApplication() (*application, error) {
 		p.Staff = staff
 		p.Services = services
 		p.Quotes = quotes
-		p.Offers = offers
-		p.Gallery = gallery
 		p.Year = time.Now().Year()
 		a.pages[route] = p
 		t, err := template.ParseFS(files, "templates/layout.html", "templates/partials/*.html", "templates/pages/"+p.Template+".html")
@@ -152,7 +139,7 @@ func (a *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		a.static.ServeHTTP(w, copyRequest)
 		return
 	}
-	aliases := map[string]string{"/home": "/", "/about-us": "/meettheteam", "/about": "/meettheteam", "/about/": "/meettheteam", "/what-we-do": "/services", "/resources": "/patient-resources"}
+	aliases := map[string]string{"/home": "/", "/about-us": "/meettheteam", "/about": "/meettheteam", "/about/": "/meettheteam", "/what-we-do": "/services", "/resources": "/patient-resources", "/client-specials": "/patient-resources", "/photo-gallery": "/visit-us"}
 	if target, ok := aliases[r.URL.Path]; ok {
 		http.Redirect(w, r, target, http.StatusMovedPermanently)
 		return
