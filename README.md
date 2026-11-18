@@ -22,12 +22,25 @@ The launcher also recognizes a local, ignored `.tools/go` toolchain. A checksum-
 
 Templates, assets, and content are embedded in the executable. Stop and restart after edits to see changes. `npm run dev` is retained only as a compatibility shortcut to `./dev.sh`; Node is not required when using Go directly.
 
+Development uses plain asset URLs and does not hash assets. The production
+container sets `FINGERPRINT_ASSETS=1`, so the server hashes all embedded `.css`
+and `.js` files under `static/`, including subdirectories, once at startup. Use
+the `assetURL` template helper to link to a fingerprinted URL. These URLs are
+immutable for one year; HTML revalidates so browsers pick up new URLs after a
+deploy. Photos and font files are unchanged.
+
 ## Build and check
 
 ```sh
 go test ./...
 go build -o bin/eagle-vet .
 ./bin/eagle-vet
+```
+
+To preview production caching locally:
+
+```sh
+FINGERPRINT_ASSETS=1 ./dev.sh
 ```
 
 The single binary contains the templates and assets. It binds to `127.0.0.1` by default; set `HOST=0.0.0.0` to accept connections from outside localhost. The production container uses `0.0.0.0:8080`. Form delivery remains unconfigured.

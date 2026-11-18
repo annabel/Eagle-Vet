@@ -12,7 +12,7 @@ import (
 
 func testApp(t *testing.T) *application {
 	t.Helper()
-	a, err := newApplication()
+	a, err := newApplication(false)
 	if err != nil {
 		t.Fatal(err)
 	}

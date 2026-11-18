@@ -2,10 +2,12 @@ package main
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"embed"
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io"
 	"io/fs"
 	"log"
 	"net"
@@ -43,9 +45,11 @@ type Page struct {
 }
 
 type application struct {
-	pages     map[string]Page
-	templates map[string]*template.Template
-	static    http.Handler
+	pages            map[string]Page
+	templates        map[string]*template.Template
+	notFoundTemplate *template.Template
+	assetAliases     map[string]string
+	static           http.Handler
 }
 
 func loadJSON(name string, target any) error {
@@ -56,7 +60,7 @@ func loadJSON(name string, target any) error {
 	return json.Unmarshal(b, target)
 }
 
-func newApplication() (*application, error) {
+func newApplication(fingerprintAssets bool) (*application, error) {
 	var staff []Person
 	var services []Service
 	var quotes []Quote
@@ -79,7 +83,31 @@ func newApplication() (*application, error) {
 		"/appointment":       {Name: "Appointment", Title: "Request an Appointment", Template: "appointment"},
 		"/hello":             {Name: "Hello", Title: "Welcome to Eagle Vet", Template: "hello"},
 	}
+	staticFS, err := fs.Sub(files, "static")
+	if err != nil {
+		return nil, err
+	}
 	a := &application{pages: pages, templates: map[string]*template.Template{}}
+	var assetURLs map[string]string
+	if fingerprintAssets {
+		assetURLs, a.assetAliases, err = fingerprintedAssets(staticFS)
+		if err != nil {
+			return nil, err
+		}
+	}
+	parsePage := func(name string) (*template.Template, error) {
+		return template.New("layout.html").Funcs(template.FuncMap{
+			"assetURL": func(url string) (string, error) {
+				if assetURLs == nil {
+					return url, nil
+				}
+				if versioned, ok := assetURLs[url]; ok {
+					return versioned, nil
+				}
+				return "", fmt.Errorf("no fingerprint for asset %s", url)
+			},
+		}).ParseFS(files, "templates/layout.html", "templates/partials/*.html", "templates/pages/"+name+".html")
+	}
 	for route, p := range pages {
 		p.Path = route
 		p.Nav = nav
@@ -88,18 +116,57 @@ func newApplication() (*application, error) {
 		p.Quotes = quotes
 		p.Year = time.Now().Year()
 		a.pages[route] = p
-		t, err := template.ParseFS(files, "templates/layout.html", "templates/partials/*.html", "templates/pages/"+p.Template+".html")
+		t, err := parsePage(p.Template)
 		if err != nil {
 			return nil, fmt.Errorf("template %s: %w", route, err)
 		}
 		a.templates[route] = t
 	}
-	staticFS, err := fs.Sub(files, "static")
+	a.notFoundTemplate, err = parsePage("404")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("template 404: %w", err)
 	}
 	a.static = http.FileServer(http.FS(staticFS))
 	return a, nil
+}
+
+// Fingerprint embedded CSS and JS once, preserving their public URL prefixes.
+func fingerprintedAssets(staticFS fs.FS) (map[string]string, map[string]string, error) {
+	urls := make(map[string]string)
+	aliases := make(map[string]string)
+	hash := sha256.New()
+	var buffer [32 * 1024]byte
+	err := fs.WalkDir(staticFS, ".", func(name string, entry fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		ext := path.Ext(name)
+		if entry.IsDir() || (ext != ".css" && ext != ".js") {
+			return nil
+		}
+		file, err := staticFS.Open(name)
+		if err != nil {
+			return fmt.Errorf("open asset %s: %w", name, err)
+		}
+		hash.Reset()
+		_, err = io.CopyBuffer(hash, file, buffer[:])
+		file.Close()
+		if err != nil {
+			return fmt.Errorf("hash asset %s: %w", name, err)
+		}
+		sum := hash.Sum(buffer[:0])
+		url := "/static/" + name
+		if strings.HasPrefix(name, "assets/") {
+			url = "/" + name
+		}
+		versioned := fmt.Sprintf("%s.%x%s", strings.TrimSuffix(url, ext), sum[:16], ext)
+		urls[url], aliases[versioned] = versioned, name
+		return nil
+	})
+	if err != nil {
+		return nil, nil, err
+	}
+	return urls, aliases, nil
 }
 
 func (a *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -117,23 +184,27 @@ func (a *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if strings.HasPrefix(r.URL.Path, "/assets/") || strings.HasPrefix(r.URL.Path, "/static/") {
-		asset := strings.TrimPrefix(r.URL.Path, "/")
-		if strings.HasPrefix(asset, "static/") {
+		asset, fingerprinted := a.assetAliases[r.URL.Path]
+		if fingerprinted {
+			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
+		} else {
+			asset = strings.TrimPrefix(r.URL.Path, "/")
 			asset = strings.TrimPrefix(asset, "static/")
+			if strings.Contains(asset, "..") || strings.Contains(asset, "/.") {
+				http.NotFound(w, r)
+				return
+			}
+			if _, err := fs.Stat(files, "static/"+asset); err != nil {
+				http.NotFound(w, r)
+				return
+			}
 		}
-		if strings.Contains(asset, "..") || strings.Contains(asset, "/.") {
-			http.NotFound(w, r)
-			return
-		}
-		if _, err := fs.Stat(files, "static/"+asset); err != nil {
-			http.NotFound(w, r)
-			return
-		}
-		copyRequest := r.Clone(r.Context())
+		copyRequest := *r
 		copyURL := *r.URL
 		copyURL.Path = "/" + asset
+		copyURL.RawPath = ""
 		copyRequest.URL = &copyURL
-		a.static.ServeHTTP(w, copyRequest)
+		a.static.ServeHTTP(w, &copyRequest)
 		return
 	}
 	aliases := map[string]string{"/home": "/", "/about-us": "/meettheteam", "/about": "/meettheteam", "/about/": "/meettheteam", "/what-we-do": "/services", "/resources": "/patient-resources", "/client-specials": "/patient-resources", "/photo-gallery": "/visit-us", "/client-portal": "/patient-resources#client-portal", "/online-ordering": "/patient-resources#online-ordering", "/holiday-hours": "/visit-us#holiday-hours"}
@@ -146,6 +217,7 @@ func (a *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, clean, http.StatusMovedPermanently)
 		return
 	}
+	w.Header().Set("Cache-Control", "no-cache")
 	p, ok := a.pages[r.URL.Path]
 	if !ok {
 		a.notFound(w, r)
@@ -166,13 +238,8 @@ func (a *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (a *application) notFound(w http.ResponseWriter, r *http.Request) {
 	p := a.pages["/"]
 	p.Title = "Page not found"
-	t, err := template.ParseFS(files, "templates/layout.html", "templates/partials/*.html", "templates/pages/404.html")
-	if err != nil {
-		http.NotFound(w, r)
-		return
-	}
 	var b bytes.Buffer
-	if t.ExecuteTemplate(&b, "layout", p) != nil {
+	if a.notFoundTemplate.ExecuteTemplate(&b, "layout", p) != nil {
 		http.NotFound(w, r)
 		return
 	}
@@ -183,7 +250,7 @@ func (a *application) notFound(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func main() {
-	app, err := newApplication()
+	app, err := newApplication(os.Getenv("FINGERPRINT_ASSETS") == "1")
 	if err != nil {
 		log.Fatal(err)
 	}
