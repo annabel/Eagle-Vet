@@ -56,26 +56,16 @@
       {
         "Label": "In-house Pharmacy",
         "URL": "/services#pharmacy"
+      },
+      {
+        "Label": "End-of-Life Care",
+        "URL": "/services#end-of-life"
       }
     ]
   },
   {
     "Label": "Resources",
-    "URL": "/resources",
-    "Links": [
-      {
-        "Label": "Patient Resources",
-        "URL": "/patient-resources"
-      },
-      {
-        "Label": "Client Portal",
-        "URL": "/client-portal"
-      },
-      {
-        "Label": "Online Ordering",
-        "URL": "/online-ordering"
-      }
-    ]
+    "URL": "/patient-resources"
   },
   {
     "Label": "Visit Us",
