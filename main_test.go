@@ -75,7 +75,7 @@ func TestPreviewRejectsSubmissions(t *testing.T) {
 }
 func TestAliasesAndNotFound(t *testing.T) {
 	a := testApp(t)
-	for from, to := range map[string]string{"/home": "/", "/about-us": "/meettheteam", "/about": "/meettheteam", "/what-we-do": "/services", "/resources": "/patient-resources", "/client-portal": "/patient-resources#client-portal", "/online-ordering": "/patient-resources#online-ordering", "/about/": "/meettheteam", "/meettheteam/": "/meettheteam"} {
+	for from, to := range map[string]string{"/home": "/", "/about-us": "/meettheteam", "/about": "/meettheteam", "/what-we-do": "/services", "/resources": "/patient-resources", "/client-portal": "/patient-resources#client-portal", "/online-ordering": "/patient-resources#online-ordering", "/holiday-hours": "/visit-us#holiday-hours", "/about/": "/meettheteam", "/meettheteam/": "/meettheteam"} {
 		w := get(a, from)
 		if w.Code != 301 || w.Header().Get("Location") != to {
 			t.Errorf("%s redirect: %d %s", from, w.Code, w.Header().Get("Location"))

@@ -59,7 +59,7 @@ The current site’s navigation groups and destination anchors are preserved:
 - **Resources** → Patient Resources, with Client Portal and Online Ordering on the same page
 - **Visit Us** → `/visit-us`
 
-Also included: `/appointment`, `/holiday-hours`, `/hello`, and a designed 404 page. `/home`, `/about`, `/about-us`, `/what-we-do`, and `/resources` redirect to their corresponding content pages. The former `/client-specials` URL redirects to Patient Resources. The former `/photo-gallery` URL redirects to Visit Us. The former `/client-portal` and `/online-ordering` URLs redirect to their sections on Patient Resources. Trailing slashes redirect to canonical paths.
+Also included: `/appointment`, `/hello`, and a designed 404 page. `/home`, `/about`, `/about-us`, `/what-we-do`, and `/resources` redirect to their corresponding content pages. The former `/client-specials` URL redirects to Patient Resources. The former `/photo-gallery` URL redirects to Visit Us. The former `/holiday-hours` URL redirects to the Holiday Hours section on Visit Us. The former `/client-portal` and `/online-ordering` URLs redirect to their sections on Patient Resources. Trailing slashes redirect to canonical paths.
 
 ## Forms and integrations
 

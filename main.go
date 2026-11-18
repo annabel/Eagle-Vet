@@ -75,9 +75,8 @@ func newApplication() (*application, error) {
 		"/services":          {Name: "Services", Title: "Our Services", Heading: "A little care goes", Accent: "a long way.", Intro: "From everyday wellness to the unexpected, personalized veterinary care for the Treasure Valley’s dogs, cats, and exotic companions.", Image: "/assets/services-hero.jpg", ImageAlt: "A cream-colored puppy sitting in the grass", Template: "services"},
 		"/testimonials":      {Name: "Testimonials", Title: "Kind Words from Our Clients", Heading: "Happy pets and the", Accent: "people who love them", Intro: "The relationships we build are at the heart of what we do. Here’s what a few of our pet families have shared about their visits.", Image: "/assets/testimonials-hero-boat.jpg", ImageAlt: "A black-and-white dog sitting on a boat at sunset", Template: "testimonials"},
 		"/patient-resources": {Name: "Patient Resources", Title: "Patient Resources", Heading: "Everything you need,", Accent: "a little closer.", Intro: "Find your pet’s client portal and order food and medication online.", Image: "/assets/patient-resources-puppy.png", ImageAlt: "A cream-colored puppy lying down with one paw stretched out", Template: "resources"},
-		"/visit-us":          {Name: "Visit Us", Title: "Visit & Contact Us", Heading: "Come visit us at our log cabin in Eagle.", Intro: "Find our little log cabin on Palmetto Avenue in Eagle. Whether you’re new here or already part of the family, we’d love to hear from you.", Image: "/assets/cabin-demo.png", ImageAlt: "Eagle Veterinary Hospital’s log cabin on Palmetto Avenue", Template: "visit"},
+		"/visit-us":          {Name: "Visit Us", Title: "Visit & Contact Us", Heading: "Come visit us at our log cabin.", Intro: "Find us on Palmetto Avenue in Eagle. Whether you’re new here or already part of the family, we’d love to hear from you.", Image: "/assets/cabin-demo.png", ImageAlt: "Eagle Veterinary Hospital’s log cabin on Palmetto Avenue", Template: "visit"},
 		"/appointment":       {Name: "Appointment", Title: "Request an Appointment", Template: "appointment"},
-		"/holiday-hours":     {Name: "Holiday Hours", Title: "Holiday Hours", Heading: "A little planning.", Accent: "A smoother visit.", Intro: "Our hours can change around holidays. Please contact the clinic to confirm opening times before making a special trip.", Template: "holidays"},
 		"/hello":             {Name: "Hello", Title: "Welcome to Eagle Vet", Template: "hello"},
 	}
 	a := &application{pages: pages, templates: map[string]*template.Template{}}
@@ -137,7 +136,7 @@ func (a *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		a.static.ServeHTTP(w, copyRequest)
 		return
 	}
-	aliases := map[string]string{"/home": "/", "/about-us": "/meettheteam", "/about": "/meettheteam", "/about/": "/meettheteam", "/what-we-do": "/services", "/resources": "/patient-resources", "/client-specials": "/patient-resources", "/photo-gallery": "/visit-us", "/client-portal": "/patient-resources#client-portal", "/online-ordering": "/patient-resources#online-ordering"}
+	aliases := map[string]string{"/home": "/", "/about-us": "/meettheteam", "/about": "/meettheteam", "/about/": "/meettheteam", "/what-we-do": "/services", "/resources": "/patient-resources", "/client-specials": "/patient-resources", "/photo-gallery": "/visit-us", "/client-portal": "/patient-resources#client-portal", "/online-ordering": "/patient-resources#online-ordering", "/holiday-hours": "/visit-us#holiday-hours"}
 	if target, ok := aliases[r.URL.Path]; ok {
 		http.Redirect(w, r, target, http.StatusMovedPermanently)
 		return

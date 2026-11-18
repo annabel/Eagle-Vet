@@ -1,1 +1,32 @@
-{{define "content"}}{{template "page-hero" .}}<section class="wrap section visit-details"><article><h2>Just around<br>the corner.</h2><address>48 N Palmetto Ave<br>Eagle, ID 83616</address><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=Eagle+Veterinary+Hospital+48+N+Palmetto+Ave+Eagle+ID">Get directions <span aria-hidden="true">↗</span></a></article><article><h3>We’re here to help.</h3><dl class="contact-list"><div><dt>Call</dt><dd><a href="tel:+12089398285">208-939-8285</a></dd></div><div><dt>Text</dt><dd><a href="sms:+12082487448">208-248-7448</a></dd></div><div><dt>Email</dt><dd><a href="mailto:info@eaglevethosp.com">info@eaglevethosp.com</a></dd></div><div><dt>Fax</dt><dd>208-939-8441</dd></div></dl></article><article class="hours-panel sage"><h3>Hospital hours</h3><p>Monday–Friday<br>Closed weekends</p><p class="fine-print">Please call to confirm opening times before your visit.</p><a class="text-link" href="/holiday-hours">Holiday hours <span aria-hidden="true">↗</span></a></article></section><section class="soft-band" id="contact"><div class="wrap contact-grid"><div><h2>Let’s start<br>with a hello.</h2><p>Ask about our services, your first visit, or how to get in touch with the right person.</p><p>Looking to arrange an appointment?</p><a class="text-link" href="/appointment">Request a visit <span aria-hidden="true">↗</span></a></div>{{template "contact-form" .}}</div></section>{{end}}
+{{define "content"}}{{template "page-hero" .}}<section class="wrap section visit-details">
+  <div class="visit-details-photo">
+    <img src="/assets/visit-us-kitten.png" alt="A gray-and-white kitten sitting upright" width="676" height="900" loading="lazy">
+    <p class="kitten-thought">This place is great!</p>
+  </div>
+  <section class="visit-info-panel" aria-labelledby="visit-info-title">
+    <h2 id="visit-info-title">Location &amp; contact</h2>
+    <div>
+      <address>48 N Palmetto Ave<br>Eagle, ID 83616</address>
+      <a class="text-link" href="https://www.google.com/maps/search/?api=1&query=Eagle+Veterinary+Hospital+48+N+Palmetto+Ave+Eagle+ID">Get directions <span aria-hidden="true">↗</span></a>
+    </div>
+    <dl class="contact-list">
+      <div><dt>Call</dt><dd><a href="tel:+12089398285">208-939-8285</a></dd></div>
+      <div><dt>Text</dt><dd><a href="sms:+12082487448">208-248-7448</a></dd></div>
+      <div><dt>Email</dt><dd><a href="mailto:info@eaglevethosp.com">info@eaglevethosp.com</a></dd></div>
+      <div><dt>Fax</dt><dd>208-939-8441</dd></div>
+    </dl>
+  </section>
+  <article class="hours-panel sage"><h3>Hospital hours</h3><p>Monday–Friday, 7:30am–6pm<br>Closed weekends</p>
+  <section class="visit-holiday-hours" id="holiday-hours" aria-labelledby="holiday-hours-title">
+    <h4 id="holiday-hours-title">Holiday hours</h4>
+    <p>We will have half-days on:</p>
+    <ul>
+      <li>Christmas Eve (8:00am–1:00pm)</li>
+      <li>New Year’s Eve (8:00am–1:00pm)</li>
+    </ul>
+    <h5>2026 closures</h5>
+    <ul>
+      <li>Thanksgiving and the day after, November 26–27</li>
+      <li>Christmas Day, December 25</li>
+    </ul>
+  </section></article></section><section class="soft-band contact-band" id="contact"><div class="wrap contact-grid"><div><h2>Need an appointment?</h2><p>Ask about our services, your first visit, or how to get in touch with the right person.</p><a class="text-link" href="/appointment">Request a visit <span aria-hidden="true">↗</span></a></div>{{template "contact-form" .}}</div></section>{{end}}
