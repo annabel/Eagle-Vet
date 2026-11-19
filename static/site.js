@@ -24,11 +24,6 @@ for (const form of document.querySelectorAll('[data-demo-form]')) {
   message.focus();
  });
 }
-for(const group of document.querySelectorAll('[data-required-group]')) {
- const checkboxes=[...group.querySelectorAll('input[type="checkbox"]')];
- const validate=()=>checkboxes[0].setCustomValidity(checkboxes.some(c=>c.checked)?'':'Please choose at least one option.');
- group.addEventListener('change',validate);validate();
-}
 
 // Load the same IDEXX Neo integration used by the current clinic site, on request.
 const portalButton=document.querySelector('[data-open-portal]');
