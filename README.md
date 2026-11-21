@@ -24,12 +24,23 @@ Templates, assets, and content are embedded in the executable. Stop and restart 
 
 Development uses plain asset URLs. The production container sets
 `FINGERPRINT_ASSETS=1`, so the server fingerprints embedded CSS, JavaScript,
-and generated images at startup. Fingerprinted URLs are immutable for one year;
+WOFF2 fonts, and generated images at startup. Fingerprinted URLs are immutable for one year;
 HTML revalidates so browsers pick up new URLs after a deploy.
 
 To update a site image, edit its master and catalog entry, then run
 `./scripts/images generate`. See [the image workflow](docs/images.md) for presets,
 responsive placement, and verification.
+
+### Self-hosted fonts
+
+The [Latin variable WOFF2s from Google Fonts](https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500..700&family=DM+Sans:wght@400..700&display=swap)
+are checked in under `static/assets/fonts/` with their SIL Open Font License files.
+`templates/partials/fonts.html` declares them with `assetURL` so production URLs
+change when the font bytes change. The site does not contact Google Fonts.
+
+When updating a font, use the Latin WOFF2 from the CSS response for a modern
+browser, keep its license alongside it, and verify mobile and desktop headline
+wrapping. Add an upstream extended subset only if the site's copy needs it.
 
 ## Build and check
 

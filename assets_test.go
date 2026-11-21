@@ -13,6 +13,14 @@ import (
 	"testing"
 )
 
+var sharedAssetURLs = []string{
+	"/static/site.css",
+	"/static/pages.css",
+	"/static/site.js",
+	"/assets/fonts/bricolage-grotesque-latin.woff2",
+	"/assets/fonts/dm-sans-latin.woff2",
+}
+
 func TestFingerprintedAssetsAndCaching(t *testing.T) {
 	a, err := newApplication(true)
 	if err != nil {
@@ -25,7 +33,7 @@ func TestFingerprintedAssetsAndCaching(t *testing.T) {
 			t.Errorf("HTML status %d: Cache-Control = %q, want no-cache", page.Code, got)
 		}
 	}
-	for _, original := range []string{"/static/site.css", "/static/pages.css", "/static/site.js", "/assets/fonts.css"} {
+	for _, original := range sharedAssetURLs {
 		t.Run(original, func(t *testing.T) {
 			plain := get(a, original)
 			if plain.Code != http.StatusOK || strings.Contains(plain.Header().Get("Cache-Control"), "immutable") {
@@ -46,6 +54,11 @@ func TestFingerprintedAssetsAndCaching(t *testing.T) {
 			if got := asset.Header().Get("Cache-Control"); got != "public, max-age=31536000, immutable" {
 				t.Errorf("fingerprinted URL Cache-Control = %q", got)
 			}
+			if ext == ".woff2" {
+				if got := asset.Header().Get("Content-Type"); got != "font/woff2" || !bytes.HasPrefix(asset.Body.Bytes(), []byte("wOF2")) {
+					t.Errorf("fingerprinted font %s: expected WOFF2, Content-Type = %q", versioned, got)
+				}
+			}
 			unknown := get(a, strings.TrimSuffix(original, ext)+"."+strings.Repeat("0", 32)+ext)
 			if unknown.Code != http.StatusNotFound || strings.Contains(unknown.Header().Get("Cache-Control"), "immutable") {
 				t.Errorf("unknown fingerprint: status %d, cache %q", unknown.Code, unknown.Header().Get("Cache-Control"))
@@ -57,7 +70,7 @@ func TestFingerprintedAssetsAndCaching(t *testing.T) {
 func TestDevelopmentUsesPlainAssetURLs(t *testing.T) {
 	a := testApp(t)
 	home := get(a, "/")
-	for _, url := range []string{"/static/site.css", "/static/pages.css", "/static/site.js", "/assets/fonts.css"} {
+	for _, url := range sharedAssetURLs {
 		if !strings.Contains(home.Body.String(), `"`+url+`"`) {
 			t.Errorf("development HTML missing plain asset URL %s", url)
 		}

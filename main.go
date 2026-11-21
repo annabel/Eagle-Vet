@@ -218,7 +218,7 @@ func imageExtension(ext string) bool {
 	return ext == ".webp" || ext == ".png" || ext == ".svg"
 }
 
-// Fingerprint embedded CSS, JS, and generated images once, preserving their public URL prefixes.
+// Fingerprint embedded styles, scripts, fonts, and generated images once, preserving their public URL prefixes.
 func fingerprintedAssets(staticFS fs.FS) (map[string]string, map[string]string, error) {
 	urls := make(map[string]string)
 	aliases := make(map[string]string)
@@ -229,7 +229,7 @@ func fingerprintedAssets(staticFS fs.FS) (map[string]string, map[string]string, 
 			return err
 		}
 		ext := path.Ext(name)
-		if entry.IsDir() || (ext != ".css" && ext != ".js" &&
+		if entry.IsDir() || (ext != ".css" && ext != ".js" && ext != ".woff2" &&
 			!(strings.HasPrefix(name, imageDir) && imageExtension(ext))) {
 			return nil
 		}
