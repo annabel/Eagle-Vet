@@ -9,7 +9,7 @@
 3. Run `./scripts/images generate` from the checkout with Docker running. Review and include the source, catalog, and changes under `static/assets/images/` in the same patch. Do not edit generated files or the manifest by hand.
 4. Run `./scripts/images check` and `go test ./...`. Open the affected page at mobile and desktop widths. Confirm the crop, transparency, and chosen `currentSrc`; for staff photos, confirm the large rendition is requested only after opening the bio.
 
-Checkouts already contain the generated images. Neither `./dev.sh` nor the application container needs Pillow or Docker-based generation to serve them. Kamal's `pre-build` hook rejects stale outputs before a deployment build.
+Checkouts already contain the generated images. Neither `./dev.sh` nor the application container needs Pillow or Docker-based generation to serve them. Before a deployment build, Kamal's `pre-build` hook checks for stale outputs and runs `go test ./...`. That suite includes `TestResponsiveImagesAreServed`, which catches rendered `<img>` and favicon URLs that bypass the pipeline but does not check CSS background images.
 
 ## Renditions and placement
 

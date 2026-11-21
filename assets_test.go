@@ -119,7 +119,16 @@ func TestResponsiveImagesAreServed(t *testing.T) {
 		routes = append(routes, route)
 	}
 	for _, route := range routes {
-		for _, tag := range tags.FindAllString(get(a, route).Body.String(), -1) {
+		res := get(a, route)
+		want := http.StatusOK
+		if route == "/missing" {
+			want = http.StatusNotFound
+		}
+		if res.Code != want {
+			t.Errorf("GET %s: status %d, want %d", route, res.Code, want)
+			continue
+		}
+		for _, tag := range tags.FindAllString(res.Body.String(), -1) {
 			for _, attr := range attrs.FindAllStringSubmatch(tag, -1) {
 				value := html.UnescapeString(attr[2])
 				if !strings.HasSuffix(attr[1], "srcset") {

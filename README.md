@@ -109,7 +109,7 @@ The homepage shows four recent Instagram posts. To refresh the selection, update
 ## Publishing
 
 Deploy manually via **Actions → Deploy → Run workflow**, or locally with `kamal deploy`.
-Kamal's pre-build hook checks that all generated images match their sources.
+Kamal's pre-build hook verifies generated images and runs the full Go test suite.
 
 Site: **https://eaglevet.greenbelt.software**
 

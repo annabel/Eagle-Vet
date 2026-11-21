@@ -1,3 +1,5 @@
 #!/bin/sh
 set -eu
-exec "$(dirname -- "$0")/../../scripts/images" check
+cd -- "$(dirname -- "$0")/../.."
+./scripts/images check
+exec go test ./...
