@@ -275,7 +275,8 @@ func (a *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if strings.HasPrefix(r.URL.Path, "/assets/") || strings.HasPrefix(r.URL.Path, "/static/") {
 		asset, fingerprinted := a.assetAliases[r.URL.Path]
 		if fingerprinted {
-			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
+			// RFC 9111 §1.2.2 uses 2^31 seconds to represent effective infinity.
+			w.Header().Set("Cache-Control", "public, max-age=2147483648, immutable")
 		} else {
 			asset = strings.TrimPrefix(r.URL.Path, "/")
 			asset = strings.TrimPrefix(asset, "static/")

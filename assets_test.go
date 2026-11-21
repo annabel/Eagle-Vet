@@ -51,7 +51,7 @@ func TestFingerprintedAssetsAndCaching(t *testing.T) {
 			if asset.Code != http.StatusOK || !bytes.Equal(asset.Body.Bytes(), plain.Body.Bytes()) {
 				t.Fatalf("fingerprinted URL %s: status %d or content mismatch", versioned, asset.Code)
 			}
-			if got := asset.Header().Get("Cache-Control"); got != "public, max-age=31536000, immutable" {
+			if got := asset.Header().Get("Cache-Control"); got != "public, max-age=2147483648, immutable" {
 				t.Errorf("fingerprinted URL Cache-Control = %q", got)
 			}
 			if ext == ".woff2" {
@@ -99,7 +99,7 @@ func TestResponsiveImagesAreServed(t *testing.T) {
 			return
 		}
 		res := get(a, asset)
-		if res.Code != http.StatusOK || res.Header().Get("Cache-Control") != "public, max-age=31536000, immutable" {
+		if res.Code != http.StatusOK || res.Header().Get("Cache-Control") != "public, max-age=2147483648, immutable" {
 			t.Errorf("%s: %s returned status %d and cache %q", route, asset, res.Code, res.Header().Get("Cache-Control"))
 			return
 		}

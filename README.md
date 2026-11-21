@@ -24,8 +24,10 @@ Templates, assets, and content are embedded in the executable. Stop and restart 
 
 Development uses plain asset URLs. The production container sets
 `FINGERPRINT_ASSETS=1`, so the server fingerprints embedded CSS, JavaScript,
-WOFF2 fonts, and generated images at startup. Fingerprinted URLs are immutable for one year;
-HTML revalidates so browsers pick up new URLs after a deploy.
+WOFF2 fonts, and generated images at startup. Fingerprinted URLs use
+`Cache-Control: public, max-age=2147483648, immutable` (about 68 years).
+Caches can still evict them sooner. HTML revalidates so browsers pick up new
+URLs after a deploy.
 
 To update a site image, edit its master and catalog entry, then run
 `./scripts/images generate`. See [the image workflow](docs/images.md) for presets,
