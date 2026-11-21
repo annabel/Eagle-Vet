@@ -1,6 +1,6 @@
 {{define "content"}}{{template "page-hero" .}}<section class="wrap section visit-details">
   <div class="visit-details-photo">
-    <img src="/assets/visit-us-kitten.png" alt="A gray-and-white kitten sitting upright" width="676" height="900" loading="lazy">
+    <img {{template "image-attrs" (image "visit-us-kitten" "inline")}} sizes="(max-width: 600px) 1px, (max-width: 850px) calc(50vw - 45px), (max-width: 1100px) calc(29vw - 33px), (max-width: 1392px) calc(29vw - 47px), 352px" alt="A gray-and-white kitten sitting upright" loading="lazy">
     <p class="kitten-thought">This place is great!</p>
   </div>
   <section class="visit-info-panel" aria-labelledby="visit-info-title">

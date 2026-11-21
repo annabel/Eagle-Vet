@@ -29,9 +29,9 @@ type NavGroup struct {
 }
 type Person struct{ Name, Role, Image, Bio string }
 type Service struct {
-	ID, Title, Intro, Image, ImageAlt string
-	Items                             []string
-	More                              []Detail
+	ID, Title, Intro, Image, ImageAlt, ImagePreset string
+	Items                                         []string
+	More                                          []Detail
 }
 type Detail struct{ Title, Text string }
 type Quote struct{ Text, Author string }
@@ -76,10 +76,10 @@ func newApplication(fingerprintAssets bool) (*application, error) {
 	pages := map[string]Page{
 		"/":                  {Name: "Home", Title: "Your pet’s health is our top priority", Template: "home"},
 		"/meettheteam":       {Name: "Meet the Team", Title: "Meet the Team", Template: "about"},
-		"/services":          {Name: "Services", Title: "Our Services", Heading: "A little care goes", Accent: "a long way.", Intro: "From everyday wellness to the unexpected, personalized veterinary care for the Treasure Valley’s dogs, cats, and exotic companions.", Image: "/assets/services-hero.jpg", ImageAlt: "A cream-colored puppy sitting in the grass", Template: "services"},
-		"/testimonials":      {Name: "Testimonials", Title: "Kind Words from Our Clients", Heading: "Happy pets and the", Accent: "people who love them", Intro: "The relationships we build are at the heart of what we do. Here’s what a few of our pet families have shared about their visits.", Image: "/assets/testimonials-hero-boat.jpg", ImageAlt: "A black-and-white dog sitting on a boat at sunset", Template: "testimonials"},
-		"/patient-resources": {Name: "Patient Resources", Title: "Patient Resources", Heading: "Everything you need,", Accent: "a little closer.", Intro: "Find your pet’s client portal and order food and medication online.", Image: "/assets/patient-resources-puppy.png", ImageAlt: "A cream-colored puppy lying down with one paw stretched out", Template: "resources"},
-		"/visit-us":          {Name: "Visit Us", Title: "Visit & Contact Us", Heading: "Come visit us at our log cabin.", Intro: "Find us on Palmetto Avenue in Eagle. Whether you’re new here or already part of the family, we’d love to hear from you.", Image: "/assets/cabin-demo.png", ImageAlt: "Eagle Veterinary Hospital’s log cabin on Palmetto Avenue", Template: "visit"},
+		"/services":          {Name: "Services", Title: "Our Services", Heading: "A little care goes", Accent: "a long way.", Intro: "From everyday wellness to the unexpected, personalized veterinary care for the Treasure Valley’s dogs, cats, and exotic companions.", Image: "services-hero", ImageAlt: "A cream-colored puppy sitting in the grass", Template: "services"},
+		"/testimonials":      {Name: "Testimonials", Title: "Kind Words from Our Clients", Heading: "Happy pets and the", Accent: "people who love them", Intro: "The relationships we build are at the heart of what we do. Here’s what a few of our pet families have shared about their visits.", Image: "testimonials-hero-boat", ImageAlt: "A black-and-white dog sitting on a boat at sunset", Template: "testimonials"},
+		"/patient-resources": {Name: "Patient Resources", Title: "Patient Resources", Heading: "Everything you need,", Accent: "a little closer.", Intro: "Find your pet’s client portal and order food and medication online.", Image: "patient-resources-puppy", ImageAlt: "A cream-colored puppy lying down with one paw stretched out", Template: "resources"},
+		"/visit-us":          {Name: "Visit Us", Title: "Visit & Contact Us", Heading: "Come visit us at our log cabin.", Intro: "Find us on Palmetto Avenue in Eagle. Whether you’re new here or already part of the family, we’d love to hear from you.", Image: "cabin-demo", ImageAlt: "Eagle Veterinary Hospital’s log cabin on Palmetto Avenue", Template: "visit"},
 		"/appointment":       {Name: "Appointment", Title: "Request an Appointment", Template: "appointment"},
 		"/hello":             {Name: "Hello", Title: "Welcome to Eagle Vet", Template: "hello"},
 	}
@@ -95,17 +95,29 @@ func newApplication(fingerprintAssets bool) (*application, error) {
 			return nil, err
 		}
 	}
+	assetURL := func(url string) (string, error) {
+		if assetURLs == nil {
+			return url, nil
+		}
+		if versioned, ok := assetURLs[url]; ok {
+			return versioned, nil
+		}
+		return "", fmt.Errorf("no fingerprint for asset %s", url)
+	}
+	images, err := loadImages(staticFS, assetURL)
+	if err != nil {
+		return nil, fmt.Errorf("image manifest: %w", err)
+	}
+	image := func(id, preset string) (siteImage, error) {
+		if entry, ok := images[id][preset]; ok {
+			return entry, nil
+		}
+		return siteImage{}, fmt.Errorf("no image %q with preset %q", id, preset)
+	}
 	parsePage := func(name string) (*template.Template, error) {
 		return template.New("layout.html").Funcs(template.FuncMap{
-			"assetURL": func(url string) (string, error) {
-				if assetURLs == nil {
-					return url, nil
-				}
-				if versioned, ok := assetURLs[url]; ok {
-					return versioned, nil
-				}
-				return "", fmt.Errorf("no fingerprint for asset %s", url)
-			},
+			"assetURL": assetURL,
+			"image":    image,
 		}).ParseFS(files, "templates/layout.html", "templates/partials/*.html", "templates/pages/"+name+".html")
 	}
 	for route, p := range pages {
@@ -130,7 +142,83 @@ func newApplication(fingerprintAssets bool) (*application, error) {
 	return a, nil
 }
 
-// Fingerprint embedded CSS and JS once, preserving their public URL prefixes.
+const imageDir = "assets/images/"
+
+type siteImage struct {
+	Src, Srcset   string
+	Width, Height int
+}
+
+func loadImages(staticFS fs.FS, assetURL func(string) (string, error)) (map[string]map[string]siteImage, error) {
+	data, err := fs.ReadFile(staticFS, imageDir+"manifest.json")
+	if err != nil {
+		return nil, err
+	}
+	var manifest map[string]map[string][]struct {
+		File          string
+		Width, Height int
+	}
+	if err := json.Unmarshal(data, &manifest); err != nil {
+		return nil, err
+	}
+	// Choose a fallback for a typical 1x slot; browsers with srcset use each placement's sizes.
+	preferredWidth := map[string]int{
+		"hero": 600, "inline": 400, "thumbnail": 300, "portrait": 260,
+		"detail": 132, "brand": 145, "icon": 32, "vector": 132,
+	}
+	images := make(map[string]map[string]siteImage, len(manifest))
+	for id, presets := range manifest {
+		images[id] = make(map[string]siteImage, len(presets))
+		for preset, candidates := range presets {
+			target, known := preferredWidth[preset]
+			if !known || len(candidates) == 0 {
+				return nil, fmt.Errorf("invalid preset %q for image %q", preset, id)
+			}
+			var entry siteImage
+			var srcset strings.Builder
+			previousWidth := 0
+			for _, candidate := range candidates {
+				if !imageExtension(path.Ext(candidate.File)) ||
+					strings.IndexFunc(candidate.File, func(r rune) bool {
+						return !(r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' ||
+							r >= '0' && r <= '9' || r == '-' || r == '_' || r == '.')
+					}) >= 0 || candidate.Width <= previousWidth || candidate.Height <= 0 {
+					return nil, fmt.Errorf("invalid candidate %q for image %q (%s)", candidate.File, id, preset)
+				}
+				previousWidth = candidate.Width
+				name := imageDir + candidate.File
+				if _, err := fs.Stat(staticFS, name); err != nil {
+					return nil, err
+				}
+				url, err := assetURL("/" + name)
+				if err != nil {
+					return nil, err
+				}
+				if entry.Width < target {
+					entry.Src, entry.Width, entry.Height = url, candidate.Width, candidate.Height
+				}
+				if len(candidates) > 1 {
+					if srcset.Len() > 0 {
+						srcset.WriteString(", ")
+					}
+					srcset.WriteString(url)
+					srcset.WriteByte(' ')
+					srcset.WriteString(strconv.Itoa(candidate.Width))
+					srcset.WriteByte('w')
+				}
+			}
+			entry.Srcset = srcset.String()
+			images[id][preset] = entry
+		}
+	}
+	return images, nil
+}
+
+func imageExtension(ext string) bool {
+	return ext == ".webp" || ext == ".png" || ext == ".svg"
+}
+
+// Fingerprint embedded CSS, JS, and generated images once, preserving their public URL prefixes.
 func fingerprintedAssets(staticFS fs.FS) (map[string]string, map[string]string, error) {
 	urls := make(map[string]string)
 	aliases := make(map[string]string)
@@ -141,7 +229,8 @@ func fingerprintedAssets(staticFS fs.FS) (map[string]string, map[string]string, 
 			return err
 		}
 		ext := path.Ext(name)
-		if entry.IsDir() || (ext != ".css" && ext != ".js") {
+		if entry.IsDir() || (ext != ".css" && ext != ".js" &&
+			!(strings.HasPrefix(name, imageDir) && imageExtension(ext))) {
 			return nil
 		}
 		file, err := staticFS.Open(name)

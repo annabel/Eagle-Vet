@@ -1,0 +1,317 @@
+{
+  "about-1": {
+    "source": "about-1.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/da39d309-6ee4-4f22-8641-316b4430e5e7/DSC06801_websize.jpg",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-10": {
+    "source": "about-10.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/16e7df77-6330-4a89-a496-9b3c48b6c911/DSC_5466%7E5.jpg",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-11": {
+    "source": "about-11.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/714927ee-525f-4ec6-9ba1-79351cffe525/DSC06891_websize.jpg",
+    "presets": []
+  },
+  "about-12": {
+    "source": "about-12.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/af790ea5-63c9-4b20-92f6-ed66a4bd3264/sandy-millar-kKAaCeGf5wY-unsplash.jpg",
+    "presets": []
+  },
+  "about-2": {
+    "source": "about-2.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/11f43c55-3733-4a3c-9ef6-8fb024ba7385/image_67579393+%281%29.jpg",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-3": {
+    "source": "about-3.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/cd47b33e-9176-4bc4-b1e9-ada0be53da88/Dr.+Lauren+Davis+picture.jpg",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-4": {
+    "source": "about-4.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/034fa221-e0e1-4ae1-9e6d-4acabb01cf89/Rochelly+picture.jpg",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-5": {
+    "source": "about-5.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/7b9e02a5-249b-45ed-a7f4-a4cb746f6e13/Kaityln+Saucerman+picture.JPG",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-6": {
+    "source": "about-6.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/c5e35e00-811b-4154-8833-19b04a49abb7/Website+Picture.jpeg",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-7": {
+    "source": "about-7.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/acb85361-32c3-47a6-8b5c-e6f7559f3ec7/Website+Picture+%281%29.PNG",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-8": {
+    "source": "about-8.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/dcd7b7a9-e8dd-43b5-8ea1-b14262e3326b/Hannah+Murphy+Picture+for+Website.jpeg",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "about-9": {
+    "source": "about-9.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/b94fc094-c906-4386-881e-b47f4eade99b/Carla+Picture.jpg",
+    "presets": [
+      "thumbnail",
+      "portrait"
+    ]
+  },
+  "cabin-demo": {
+    "source": "cabin-demo.png",
+    "presets": [
+      "hero"
+    ]
+  },
+  "client-portal-1": {
+    "source": "client-portal-1.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/8379962a-a68b-4ae5-a1a3-d6c261b9fd14/getty-images-hvWi6hrDxL8-unsplash.jpg",
+    "presets": []
+  },
+  "clinic-team": {
+    "source": "clinic-team.webp",
+    "presets": []
+  },
+  "end-of-life-wildflowers": {
+    "source": "end-of-life-wildflowers.svg",
+    "presets": [
+      "vector"
+    ]
+  },
+  "instagram-2026-10-16": {
+    "source": "instagram-2026-10-16.jpg",
+    "provenance": "https://www.instagram.com/eaglevethosp/p/DekBSbUCPqC/",
+    "presets": [
+      "thumbnail"
+    ]
+  },
+  "instagram-2026-10-23": {
+    "source": "instagram-2026-10-23.jpg",
+    "provenance": "https://www.instagram.com/eaglevethosp/p/De2C0aRD4Os/",
+    "presets": [
+      "thumbnail"
+    ]
+  },
+  "instagram-2026-10-29": {
+    "source": "instagram-2026-10-29.jpg",
+    "provenance": "https://www.instagram.com/eaglevethosp/p/DfGAhYMkoUt/",
+    "presets": [
+      "thumbnail"
+    ]
+  },
+  "instagram-2026-11-06": {
+    "source": "instagram-2026-11-06.jpg",
+    "provenance": "https://www.instagram.com/eaglevethosp/p/DfaQPpyjbmh/",
+    "presets": [
+      "thumbnail"
+    ]
+  },
+  "logo-mark": {
+    "source": "logo-mark.webp",
+    "presets": [
+      "brand",
+      "icon"
+    ]
+  },
+  "logo": {
+    "source": "logo.webp",
+    "presets": []
+  },
+  "online-ordering-1": {
+    "source": "online-ordering-1.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/82b636e7-f20d-4395-ae14-3c57eb126811/Untitled+design+%2892%29.png",
+    "presets": []
+  },
+  "original-home-hero": {
+    "source": "original-home-hero.webp",
+    "presets": [
+      "hero"
+    ]
+  },
+  "patient-resources-1": {
+    "source": "patient-resources-1.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/ff7bd1a6-9122-4632-95d4-7b4980058eec/bruno-cervera-azsk_6IMT3I-unsplash.jpg",
+    "presets": [
+      "inline"
+    ]
+  },
+  "patient-resources-2": {
+    "source": "patient-resources-2.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/91b2c04b-c161-4024-b4f7-cfc73dc59f6a/curated-lifestyle-dXPvU-ZUAV0-unsplash.jpg",
+    "presets": []
+  },
+  "patient-resources-3": {
+    "source": "patient-resources-3.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/d982594f-19e3-40a9-ba6a-c435b39a2ee6/milada-vigerova-DtoL63F-Hso-unsplash.jpg",
+    "presets": []
+  },
+  "patient-resources-puppy": {
+    "source": "patient-resources-puppy.png",
+    "presets": [
+      "hero"
+    ]
+  },
+  "pet-care": {
+    "source": "pet-care.webp",
+    "presets": []
+  },
+  "robyn-boersma-dog": {
+    "source": "robyn-boersma-dog.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/07a54055-8c59-4c3c-9ae2-ca155ad1923e/Robyn%2BBoersma.jpg",
+    "presets": [
+      "inline"
+    ]
+  },
+  "services-1": {
+    "source": "services-1.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/a5167529-e7f7-4eaa-8076-8643c0f0dae8/DSC06796_websize.jpg",
+    "presets": []
+  },
+  "services-2": {
+    "source": "services-2.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/1c78f3cb-e991-4bed-b804-2408f149289d/getty-images-HUDOa0v6FDQ-unsplash.jpg",
+    "presets": [
+      "detail"
+    ]
+  },
+  "services-3": {
+    "source": "services-3.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/2221bb22-e2e0-4165-8599-d5242112c33a/isabela-kronemberger-if5drRE4OM0-unsplash.jpg",
+    "presets": [
+      "detail"
+    ]
+  },
+  "services-4": {
+    "source": "services-4.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/fcad71be-46c9-4ba4-917f-d529d345d767/DSC06786_websize.jpg",
+    "presets": [
+      "detail"
+    ]
+  },
+  "services-5": {
+    "source": "services-5.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/36314cee-8405-40ff-9269-35d10b419eb2/DSC06867_websize.jpg",
+    "presets": [
+      "detail"
+    ]
+  },
+  "services-6": {
+    "source": "services-6.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/408f2d84-6b78-4c5f-ab3d-cb0a4d6a747e/getty-images-LjipWXRQnBI-unsplash.jpg",
+    "presets": [
+      "detail"
+    ]
+  },
+  "services-7": {
+    "source": "services-7.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/81362892-5217-4879-9712-0d19d4dea5f5/giu-vicente-OZ7J3eehqZM-unsplash.jpg",
+    "presets": [
+      "detail"
+    ]
+  },
+  "services-8": {
+    "source": "services-8.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/6d0cef34-ec71-4ce6-bf36-173f76965bf7/Untitled+design+%283%29.png",
+    "presets": [
+      "detail"
+    ]
+  },
+  "services-9": {
+    "source": "services-9.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/2120884c-4f5d-41dc-9ee6-24a1392dccee/getty-images-_TGgw2RhykQ-unsplash.jpg",
+    "presets": [
+      "detail"
+    ]
+  },
+  "services-hero": {
+    "source": "services-hero.jpg",
+    "presets": [
+      "hero"
+    ]
+  },
+  "team-at-sign": {
+    "source": "team-at-sign.jpg",
+    "provenance": "https://www.facebook.com/photo/?fbid=423342870519408&set=a.115614104625621",
+    "presets": [
+      "inline"
+    ]
+  },
+  "testimonials-1": {
+    "source": "testimonials-1.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/5efc7b17-7ab3-4857-9d13-6a61f2e5f2c9/ave-calvar-V4RNYv3kvr0-unsplash.jpg",
+    "presets": []
+  },
+  "testimonials-2": {
+    "source": "testimonials-2.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/18a6a7b3-f8f0-4f95-bcbd-38183d474ba4/2024-04-05.jpg",
+    "presets": []
+  },
+  "testimonials-hero-boat": {
+    "source": "testimonials-hero-boat.jpg",
+    "presets": [
+      "hero"
+    ]
+  },
+  "testimonials-hero-closeup": {
+    "source": "testimonials-hero-closeup.jpg",
+    "presets": []
+  },
+  "testimonials-hero-indoor": {
+    "source": "testimonials-hero-indoor.jpg",
+    "presets": []
+  },
+  "testimonials-hero": {
+    "source": "testimonials-hero.jpg",
+    "presets": []
+  },
+  "visit-us-1": {
+    "source": "visit-us-1.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/ddd50121-c5b8-420f-a354-57c4054d6bed/DSC06842_websize.jpg",
+    "presets": []
+  },
+  "visit-us-2": {
+    "source": "visit-us-2.webp",
+    "provenance": "https://images.squarespace-cdn.com/content/v1/63010fc75c3e1851ca49d279/4b8dbf80-b955-452a-98f5-c830f8423356/camylla-battani-AoqgGAqrLpU-unsplash.jpg",
+    "presets": [
+      "inline"
+    ]
+  },
+  "visit-us-kitten": {
+    "source": "visit-us-kitten.png",
+    "presets": [
+      "inline"
+    ]
+  }
+}

@@ -9,7 +9,7 @@ Source: public eaglevethosp.com pages retrieved October 30, 2026. Navigation gro
 - **Naturopathic services:** the service names were retained. Detailed efficacy claims were replaced with neutral descriptions and a suggestion to discuss suitability with the veterinarian. Ask the owner to review.
 - **Homepage:** the approved headline and dog image remain. “Fido & Max, Eagle, ID” is a placeholder, not verified dog names or location.
 - **Cabin image:** the existing AI-retouched map screenshot remains. Replace it with an original, licensed exterior photo.
-- **Other imagery and reviews:** confirm permission to reuse all clinic photos, staff portraits, testimonials, and Unsplash-derived imagery. Download source URLs are in image-sources.json.
+- **Other imagery and reviews:** confirm permission to reuse all clinic photos, staff portraits, testimonials, and Unsplash-derived imagery. Recorded source URLs are in `images/catalog.json`.
 - **Forms:** contact and appointment forms are non-submitting demonstrations. Confirm form fields, response time, inbox destination, appointment approval workflow, and spam controls before adding delivery.
 - **IDEXX:** the current client portal configuration was retained and is loaded only on request. Authenticated login was not tested. Verify the current portal with the clinic before launch.
 - **Vetsource:** the current pharmacy link includes a legacy eaglevet.net return URL. It is preserved for now; ask the clinic for its preferred current storefront URL.

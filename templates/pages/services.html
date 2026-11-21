@@ -3,7 +3,7 @@
  {{range .Services}}
  <article id="{{.ID}}" class="service-detail">
   <div class="service-card-heading">
-   {{if .Image}}<img src="{{.Image}}" width="900" height="900" loading="lazy" alt="{{if .ImageAlt}}{{.ImageAlt}}{{else}}{{.Title}} photography from Eagle Veterinary Hospital{{end}}">{{end}}
+   {{if .Image}}<img {{template "image-attrs" (image .Image (or .ImagePreset "detail"))}} {{if ne .ImagePreset "vector"}}sizes="clamp(86px, 11vw, 132px)"{{end}} loading="lazy" alt="{{if .ImageAlt}}{{.ImageAlt}}{{else}}{{.Title}} photography from Eagle Veterinary Hospital{{end}}">{{end}}
    <div>
     <h2>{{.Title}}</h2>
     <p>{{.Intro}}</p>

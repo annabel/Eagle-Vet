@@ -55,6 +55,11 @@ for (const button of document.querySelectorAll('[data-bio-open]')) {
   if(!dialog || dialog.open)return;
   biographyOpener=button;
   dialog.showModal();
+  const portrait=dialog.querySelector('img[data-src]');
+  if (portrait && !portrait.hasAttribute('src')) {
+   if (portrait.dataset.srcset) portrait.srcset=portrait.dataset.srcset;
+   portrait.src=portrait.dataset.src;
+  }
   document.body.classList.add('bio-open');
  });
 }

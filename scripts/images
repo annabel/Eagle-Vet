@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+if [ "$#" -ne 1 ] || { [ "$1" != generate ] && [ "$1" != check ]; }; then
+  echo 'Usage: scripts/images generate|check' >&2
+  exit 2
+fi
+
+root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+platform=linux/amd64
+mount="type=bind,source=$root,target=/work"
+if [ "$1" = check ]; then
+  mount="$mount,readonly"
+fi
+
+image=$(docker build --load --quiet --platform "$platform" "$root/images/toolchain")
+exec docker run --rm --platform "$platform" --network none --user "$(id -u):$(id -g)" \
+  --mount "$mount" "$image" "$1"

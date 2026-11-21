@@ -11,7 +11,7 @@
       "Flea and tick prevention",
       "Preventive screening lab work"
     ],
-    "Image": "/assets/services-2.jpg",
+    "Image": "services-2",
     "More": []
   },
   {
@@ -25,7 +25,7 @@
       "In-house lab work",
       "Digital radiographs"
     ],
-    "Image": "/assets/services-3.jpg",
+    "Image": "services-3",
     "More": []
   },
   {
@@ -38,7 +38,7 @@
       "Oral surgery",
       "Digital dental X-rays"
     ],
-    "Image": "/assets/services-4.jpg",
+    "Image": "services-4",
     "More": []
   },
   {
@@ -51,7 +51,7 @@
       "Mass removal",
       "Cystotomy / bladder stone removal"
     ],
-    "Image": "/assets/services-5.jpg",
+    "Image": "services-5",
     "More": []
   },
   {
@@ -68,7 +68,7 @@
       "Vomiting and diarrhea",
       "Ear infections"
     ],
-    "Image": "/assets/services-6.jpg",
+    "Image": "services-6",
     "More": []
   },
   {
@@ -81,7 +81,7 @@
       "Turtles and tortoises",
       "Birds: parakeets, cockatiels, parrots, chickens, and ducks"
     ],
-    "Image": "/assets/services-7.jpg",
+    "Image": "services-7",
     "More": []
   },
   {
@@ -97,13 +97,14 @@
       "Herbs and nutraceuticals",
       "Flea, tick, and heartworm prevention"
     ],
-    "Image": "/assets/services-9.jpg",
+    "Image": "services-9",
     "More": []
   },
   {
     "ID": "end-of-life",
     "Title": "End-of-Life Care",
-    "Image": "/assets/end-of-life-wildflowers.svg",
+    "Image": "end-of-life-wildflowers",
+    "ImagePreset": "vector",
     "ImageAlt": "A hand-drawn sprig of wildflowers",
     "Intro": "Saying goodbye to a pet is hard. We’re here to listen, answer your questions, and talk through end-of-life care and cremation at your pace."
   },
@@ -119,7 +120,7 @@
       "Reiki",
       "Nutraceuticals"
     ],
-    "Image": "/assets/services-8.jpg",
+    "Image": "services-8",
     "More": [
       {
         "Title": "Acupuncture",

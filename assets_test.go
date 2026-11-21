@@ -4,9 +4,11 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"fmt"
+	"html"
 	"net/http"
 	"net/http/httptest"
 	"path"
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -58,6 +60,68 @@ func TestDevelopmentUsesPlainAssetURLs(t *testing.T) {
 	for _, url := range []string{"/static/site.css", "/static/pages.css", "/static/site.js", "/assets/fonts.css"} {
 		if !strings.Contains(home.Body.String(), `"`+url+`"`) {
 			t.Errorf("development HTML missing plain asset URL %s", url)
+		}
+	}
+}
+
+func TestResponsiveImagesAreServed(t *testing.T) {
+	a, err := newApplication(true)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	tags := regexp.MustCompile(`<(?:img\b|link rel="icon")[^>]*>`)
+	attrs := regexp.MustCompile(` (src|srcset|data-src|data-srcset|href)="([^"]+)"`)
+	width := regexp.MustCompile(`^[1-9][0-9]*w$`)
+	mimeTypes := map[string]string{".webp": "image/webp", ".png": "image/png", ".svg": "image/svg+xml"}
+	seen := make(map[string]bool)
+	check := func(route, asset string) {
+		t.Helper()
+		if seen[asset] {
+			return
+		}
+		seen[asset] = true
+		if !strings.HasPrefix(asset, "/assets/images/") {
+			t.Errorf("%s: %s bypasses generated image assets", route, asset)
+			return
+		}
+		res := get(a, asset)
+		if res.Code != http.StatusOK || res.Header().Get("Cache-Control") != "public, max-age=31536000, immutable" {
+			t.Errorf("%s: %s returned status %d and cache %q", route, asset, res.Code, res.Header().Get("Cache-Control"))
+			return
+		}
+		want := mimeTypes[path.Ext(asset)]
+		if got, _, _ := strings.Cut(res.Header().Get("Content-Type"), ";"); want == "" || got != want {
+			t.Errorf("%s: %s Content-Type = %q, want %q", route, asset, got, want)
+		}
+		if want == "image/webp" || want == "image/png" {
+			if got := http.DetectContentType(res.Body.Bytes()); got != want {
+				t.Errorf("%s: %s body format = %q, want %q", route, asset, got, want)
+			}
+		}
+	}
+
+	routes := []string{"/missing"}
+	for route := range a.pages {
+		routes = append(routes, route)
+	}
+	for _, route := range routes {
+		for _, tag := range tags.FindAllString(get(a, route).Body.String(), -1) {
+			for _, attr := range attrs.FindAllStringSubmatch(tag, -1) {
+				value := html.UnescapeString(attr[2])
+				if !strings.HasSuffix(attr[1], "srcset") {
+					check(route, value)
+					continue
+				}
+				for _, candidate := range strings.Split(value, ",") {
+					fields := strings.Fields(candidate)
+					if len(fields) != 2 || !width.MatchString(fields[1]) {
+						t.Errorf("%s: invalid image candidate %q", route, candidate)
+						continue
+					}
+					check(route, fields[0])
+				}
+			}
 		}
 	}
 }

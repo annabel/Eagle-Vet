@@ -22,12 +22,14 @@ The launcher also recognizes a local, ignored `.tools/go` toolchain. A checksum-
 
 Templates, assets, and content are embedded in the executable. Stop and restart after edits to see changes. `npm run dev` is retained only as a compatibility shortcut to `./dev.sh`; Node is not required when using Go directly.
 
-Development uses plain asset URLs and does not hash assets. The production
-container sets `FINGERPRINT_ASSETS=1`, so the server hashes all embedded `.css`
-and `.js` files under `static/`, including subdirectories, once at startup. Use
-the `assetURL` template helper to link to a fingerprinted URL. These URLs are
-immutable for one year; HTML revalidates so browsers pick up new URLs after a
-deploy. Photos and font files are unchanged.
+Development uses plain asset URLs. The production container sets
+`FINGERPRINT_ASSETS=1`, so the server fingerprints embedded CSS, JavaScript,
+and generated images at startup. Fingerprinted URLs are immutable for one year;
+HTML revalidates so browsers pick up new URLs after a deploy.
+
+To update a site image, edit its master and catalog entry, then run
+`./scripts/images generate`. See [the image workflow](docs/images.md) for presets,
+responsive placement, and verification.
 
 ## Build and check
 
@@ -57,7 +59,8 @@ The single binary contains the templates and assets. It binds to `127.0.0.1` by 
 | `content/` | Hard-coded staff bios, navigation, services, and testimonials |
 | `static/` | CSS, JavaScript, logo, and existing-site photography |
 | `docs/content-review.md` | Items to confirm with the clinic before launch |
-| `docs/image-sources.json` | URLs for photographs downloaded from the current clinic site |
+| `images/` | Image masters, provenance catalog, and offline generator |
+| `docs/images.md` | Image workflow, presets, and verification |
 | `legacy/` | Backup of the previous static homepage and Node preview, including its local port fix |
 
 Most page copy lives directly in the templates. Shared records live in JSON files for easy maintenance. `html/template` escapes content when rendering. There is no content editor.
@@ -90,11 +93,12 @@ The hero caption “Fido & Max, Eagle, ID” remains an unverified placeholder. 
 
 Hours conflict and holiday dates are stale on the current site. The redesign shows weekdays, asks visitors to confirm opening times, and avoids presenting old holiday dates as current. Wellness-profile prices mirror the source and require owner confirmation. See `docs/content-review.md`.
 
-The homepage shows four recent Instagram posts. To refresh the selection, update the images, dates, short descriptions, and links in `templates/pages/home.html` and record their sources in `docs/image-sources.json`. There is no live feed; replace dated promotions after they end.
+The homepage shows four recent Instagram posts. To refresh the selection, update the dates, descriptions, links, and image IDs in `templates/pages/home.html`. Add the masters and provenance to the [image pipeline](docs/images.md) and regenerate. There is no live feed; replace dated promotions after they end.
 
 ## Publishing
 
 Deploy manually via **Actions → Deploy → Run workflow**, or locally with `kamal deploy`.
+Kamal's pre-build hook checks that all generated images match their sources.
 
 Site: **https://eaglevet.greenbelt.software**
 
